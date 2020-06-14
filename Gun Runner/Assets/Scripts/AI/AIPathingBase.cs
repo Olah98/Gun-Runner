@@ -25,22 +25,48 @@ public class AIPathingBase : MonoBehaviour
     [Header("The Radius of The Attack Range")]
     public float checkRadius = 10f;
 
+    [Header("Health of enemy")]
     public int health = 100;
-
+    [Header("Target")]
     public Transform _poi;
+    public Vector3 distanceToTarget;
+    [Header("Distance to target")]
+    public float distance;
+    [Header("Fire Range")]
+    public float fireRange = 9f;
 
+    [Header("Idle Movement var")]
     public float directionDurationMax;
     public float directionDurationMin;
 
+    [Header("Current Direction facing")]
     public direction patrolDir;
     direction _opposite;
     direction _current;
+    [Header("Set enemy to idle or patrol idle")]
     public bool canPatrol = true;
 
+    [Header("How fast it moves")]
     public float speed;
     private float _currentUsedSpeed;
     private float _speedMin;
     private float _speedMax;
+
+    public float fireRate;
+    public float counter = 0f;
+
+    public GameObject projectile;
+
+    public bool LineOfSightMade = false;
+    public bool InRangeToFire = false;
+
+    private NavMeshPath path;
+
+    public int _currentIndex = 0;
+    private float _reachDistance = 1.0f;
+    private bool _isDone = false;
+
+    public float rotationSpeed = 5.0f;
 
     //patrol will be either moving one direction or anthor
 
@@ -126,12 +152,152 @@ public class AIPathingBase : MonoBehaviour
         else
         {
             //we have target
-            //move towards target
-            agent.SetDestination(_poi.position);
+            
+            //if target is close enough and we have line of sight
+            if (LineOfSight() && CheckPOIDistance())
+            {
+                this.transform.LookAt(_poi);
+                //if(LineOfSightMade)
+                //{
+                agent.isStopped = true;
+                    //shooting starts here
+                    //while we can shoot, there will be a timer that runs between each shot
+                    counter += Time.deltaTime;
+                    if (counter >= fireRate)
+                    {
+                        //fire projectile forward (at player or poi)
+                        Debug.Log("shoot");
+                        Instantiate(projectile, transform.position, transform.rotation);
+                        counter = 0.0f;
+                    }
+                //}
+                
+            }
+            else
+            {
+                agent.isStopped = false;
+                //else
+                //move towards target
+                //agent.SetDestination(_poi.position);
+                //float step = 15 * speed * Time.deltaTime;
+                
+
+                //update path to target
+                path = new NavMeshPath();
+                if(NavMesh.CalculatePath(transform.position, _poi.position, NavMesh.AllAreas, path))
+                {
+                    //Debug.Log(path.corners.Length);
+                    //draw path
+                    //set it
+                    agent.SetPath(path);
+                    for (int i = 0; i < path.corners.Length - 1; i++)
+                    {
+                        Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.green);
+                    }
+                }
+
+                
+
+                //follow path to target
+                //agent.SetDestination(Vector3.MoveTowards(transform.position,_poi.position, step));
+                //DoMovement();
+                
+            }
         }
     }
 
- 
+    //UNUSED
+    void DoMovement()
+    {
+        float distance = Vector3.Distance(path.corners[_currentIndex], transform.position);
+        //agent.transform.position = Vector3.MoveTowards(transform.position, path.corners[_currentIndex], Time.deltaTime * speed);
+        agent.SetDestination(Vector3.MoveTowards(transform.position, path.corners[_currentIndex], Time.deltaTime * speed * 100));
+
+        if(path.corners[_currentIndex] - transform.position != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(path.corners[_currentIndex] - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        }
+
+        if(distance <= _reachDistance && _currentIndex < path.corners.Length - 1)
+        {
+            if (!_isDone)
+                _currentIndex++;
+            else
+                _isDone = true;
+        }
+    }
+
+
+    //finds distance between enemy and poi, returns true if we are in range
+    bool CheckPOIDistance()
+    {
+        bool attackMode = false;
+
+        distanceToTarget = this.transform.position - _poi.transform.position;
+        distance = distanceToTarget.magnitude;
+
+        if(distanceToTarget.magnitude < fireRange)
+        {
+            attackMode = true;
+        }
+
+        return attackMode;
+    }
+
+    bool LineOfSight()
+    {
+        bool hitTarget = false;
+        RaycastHit lineOfSight;
+
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * fireRange;
+        
+        //Vector3 left = transform.TransformDirection(new Vector3(0, 0, 0.5f)) * fireRange;
+        //Vector3 right = transform.TransformDirection(new Vector3(0, 0, 1.5f)) * fireRange;
+
+        
+
+        //have 3 raycasts total, one dead center, one slightly left and slightly right
+        Vector3 left = new Vector3(transform.position.x + 0.2f, transform.position.y, transform.position.z);
+        Vector3 right = new Vector3(transform.position.x - 0.2f, transform.position.y, transform.position.z);
+
+        Debug.DrawRay(transform.position, forward, Color.red);
+        Debug.DrawRay(left, forward, Color.red);
+        Debug.DrawRay(right, forward, Color.red);
+
+
+        //if we hit something, check to see if its player
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out lineOfSight, Mathf.Infinity) || Physics.Raycast(left, transform.TransformDirection(Vector3.forward), out lineOfSight, Mathf.Infinity) || Physics.Raycast(right, transform.TransformDirection(Vector3.forward), out lineOfSight, Mathf.Infinity))
+        {
+            if (lineOfSight.collider.tag == "Player")
+            {
+                hitTarget = true;
+            }
+            else
+                hitTarget = false;
+        }
+
+        return hitTarget;
+    }
+
+    bool Tracking()
+    {
+        bool hitTarget = false;
+        RaycastHit tracking;
+
+        Debug.DrawRay(transform.position, _poi.transform.position, Color.black);
+        if(Physics.Raycast(transform.position, transform.TransformDirection(_poi.transform.position), out tracking, Mathf.Infinity))
+        {
+            if (tracking.collider.tag == "Player")
+            {
+                hitTarget = true;
+            }
+            else
+                hitTarget = false;
+        }
+
+        return hitTarget;
+    }
 
     //find target
     Transform GetClosestEnemy()
@@ -190,24 +356,30 @@ public class AIPathingBase : MonoBehaviour
         {
             case direction.up:
                 //z forward
-                agent.transform.Translate(Vector3.forward * _currentUsedSpeed * Time.deltaTime);
+                //agent.transform.Translate(Vector3.forward * _currentUsedSpeed * Time.deltaTime);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
                 break;
             case direction.down:
                 //z backwards
-                agent.transform.Translate(Vector3.back * _currentUsedSpeed * Time.deltaTime);
+                //agent.transform.Translate(Vector3.back * _currentUsedSpeed * Time.deltaTime);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180f, transform.eulerAngles.z);
                 break;
             case direction.left:
                 //x left
-                agent.transform.Translate(Vector3.left * _currentUsedSpeed * Time.deltaTime);
+                //agent.transform.Translate(Vector3.left * _currentUsedSpeed * Time.deltaTime);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 90f, transform.eulerAngles.z);
                 break;
             case direction.right:
                 //x right
-                agent.transform.Translate(Vector3.right * _currentUsedSpeed * Time.deltaTime);
+                //agent.transform.Translate(Vector3.right * _currentUsedSpeed * Time.deltaTime);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, -90, transform.eulerAngles.z);
                 break;
             default:
                 break;
         }
 
+        if(_current != direction.stop)
+            agent.transform.Translate(Vector3.forward * _currentUsedSpeed * Time.deltaTime);
     }
 
     IEnumerator changeDirections()
