@@ -51,22 +51,24 @@ public class AIPathingBase : MonoBehaviour
     private float _currentUsedSpeed;
     private float _speedMin;
     private float _speedMax;
-
+    
     public float fireRate;
-    public float counter = 0f;
-
+    private float counter = 0f;
+    [Header("Bullet prefab")]
     public GameObject projectile;
-
+    [Header("Viewing player")]
     public bool LineOfSightMade = false;
     public bool InRangeToFire = false;
 
     private NavMeshPath path;
 
-    public int _currentIndex = 0;
+    private int _currentIndex = 0;
     private float _reachDistance = 1.0f;
     private bool _isDone = false;
 
     public float rotationSpeed = 5.0f;
+    [Header("Location bullets are fired from")]
+    public GameObject gunLoc;
 
     //patrol will be either moving one direction or anthor
 
@@ -165,10 +167,7 @@ public class AIPathingBase : MonoBehaviour
                     counter += Time.deltaTime;
                     if (counter >= fireRate)
                     {
-                        //fire projectile forward (at player or poi)
-                        Debug.Log("shoot");
-                        Instantiate(projectile, transform.position, transform.rotation);
-                        counter = 0.0f;
+                        FireBullet();
                     }
                 //}
                 
@@ -196,14 +195,26 @@ public class AIPathingBase : MonoBehaviour
                     }
                 }
 
-                
-
                 //follow path to target
                 //agent.SetDestination(Vector3.MoveTowards(transform.position,_poi.position, step));
                 //DoMovement();
                 
             }
         }
+    }
+
+    //rooty shooty mc tooty
+    void FireBullet()
+    {
+        //fire projectile forward (at player or poi)
+        Debug.Log("shoot");
+        GameObject bullet = Instantiate(projectile, gunLoc.transform.position, gunLoc.transform.rotation);
+        //set any variables HERE
+
+
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
+        counter = 0.0f;
     }
 
     //UNUSED
@@ -227,7 +238,6 @@ public class AIPathingBase : MonoBehaviour
                 _isDone = true;
         }
     }
-
 
     //finds distance between enemy and poi, returns true if we are in range
     bool CheckPOIDistance()
@@ -340,7 +350,9 @@ public class AIPathingBase : MonoBehaviour
     //show range of enemy (mainly for debugging)
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, checkRadius);
+        
     }
 
     //simple math, get distance
@@ -422,5 +434,12 @@ public class AIPathingBase : MonoBehaviour
         }
 
         StartCoroutine(changeDirections());
+    }
+
+    //function uses externally 
+    public void setPOI(Transform poi)
+    {
+        //when player fires shot and enemy is in range, it sets the poi
+        _poi = poi;
     }
 }

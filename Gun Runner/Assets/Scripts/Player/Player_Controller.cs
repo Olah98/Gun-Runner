@@ -13,6 +13,9 @@ public class Player_Controller : MonoBehaviour
     public GameObject gunLoc;//the location that the bullets are fired from
     public GameObject bulletPrefab;
 
+    [Header("Shooting Detection Range")]
+    public float shootingDetectionRadius = 20f;
+    Transform[] _proxEnemies;
 
 
     private void Awake()
@@ -50,9 +53,44 @@ public class Player_Controller : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
+            ShootingDetection();
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
             Destroy(bullet, 3f);
+        }
+    }
+
+
+    //shooting detection
+    //show range of shooting detection (mainly for debugging)
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, shootingDetectionRadius);
+        
+    }
+
+    //locate possible enemy transforms from colliders found in sphere
+    private Transform[] collidersToTransforms(Collider[] colliders)
+    {
+        Transform[] transforms = new Transform[colliders.Length];
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            transforms[i] = colliders[i].transform;
+        }
+        return transforms;
+    }
+
+    //any enemies in radius will be alerted to shooting
+    void ShootingDetection()
+    {
+        _proxEnemies = collidersToTransforms(Physics.OverlapSphere(transform.position, shootingDetectionRadius));
+        foreach (Transform potentialTarget in _proxEnemies)
+        {
+            if (potentialTarget.gameObject.tag == "Enemy")
+            {
+                potentialTarget.gameObject.GetComponent<AIPathingBase>().setPOI(this.transform);
+            }
         }
     }
 }
