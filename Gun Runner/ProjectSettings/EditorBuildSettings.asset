@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Gun Runner.unity
+    guid: 9e2a86e633a0d014ca812021a43bc3a1
   m_configObjects: {}
