@@ -10,18 +10,21 @@ public class Player_Controller : MonoBehaviour
     [Header ("Player Vars")]
     //this is the playes move speed
     public float moveSpeed;
-    GameObject gunLoc;//the location that the bullets are fired from
+    public GameObject gunLoc;//the location that the bullets are fired from
+    public GameObject bulletPrefab;
 
 
 
     private void Awake()
     {
         playerCam = Camera.main;
+        gunLoc = this.transform.GetChild(0).gameObject;
     }
     void Update()
     {
         lookAround();
         moveAround();
+        shootCurGun();
 
     }
 
@@ -43,6 +46,13 @@ public class Player_Controller : MonoBehaviour
 
     void shootCurGun()
     {
-       
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
+            Destroy(bullet, 3f);
+        }
     }
 }
