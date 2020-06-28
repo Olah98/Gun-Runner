@@ -9,13 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Gun Runner.unity
     guid: 9e2a86e633a0d014ca812021a43bc3a1
   - enabled: 1
-    path: Assets/Scenes/HomeScreen.unity
+    path: Assets/Scenes/Menu Scenes/HomeScreen.unity
     guid: 3ce081ba3a4219e41b9f2597150a736c
   - enabled: 1
     path: Assets/Scenes/Tutorial Level.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/CreditsScene.unity
+    path: Assets/Scenes/Menu Scenes/CreditsScene.unity
     guid: f891bb630a367734586aa74ef5f852f1
   - enabled: 1
     path: Assets/Scenes/Prototype1_End.unity
