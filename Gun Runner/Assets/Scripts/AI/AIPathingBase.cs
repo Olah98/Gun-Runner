@@ -247,14 +247,18 @@ public class AIPathingBase : MonoBehaviour
     //rooty shooty mc tooty
     void FireBullet()
     {
+        //new system
+        gun.GetComponent<Weapon>().Shooting();
+
+
+        //old system
         //fire projectile forward (at player or poi)
-        //Debug.Log("shoot");
-        GameObject bullet = Instantiate(projectile, gunLoc.transform.position, gunLoc.transform.rotation);
+        //GameObject bullet = Instantiate(projectile, gunLoc.transform.position, gunLoc.transform.rotation);
         //set any variables HERE
-        bullet.GetComponent<Bullet>().type = shootType.enemy;
-        bullet.GetComponent<Bullet>().damage = gunDamage;
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
+        //bullet.GetComponent<Bullet>().type = shootType.enemy;
+        //bullet.GetComponent<Bullet>().damage = gunDamage;
+        //Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        //rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
         counter = 0.0f;
     }
 

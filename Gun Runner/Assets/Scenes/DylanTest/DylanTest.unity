@@ -166,7 +166,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.25
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 17a0c459e3bdfc646b33fd76350c29b4, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 76236813a69c2704891a60d7bc61e4f1, type: 2}
 --- !u!4 &14225836
 Transform:
   m_ObjectHideFlags: 0
@@ -181,6 +181,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &386007832 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5510293712702462090, guid: 3a88b09fcdbecf849a95dc025728e335,
+    type: 3}
+  m_PrefabInstance: {fileID: 1970275584}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &441037578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,6 +1041,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8510327572285361758, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: m_Name
+      value: weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 8510327572338910937, guid: 3a88b09fcdbecf849a95dc025728e335,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1043,7 +1054,7 @@ PrefabInstance:
     - target: {fileID: 8510327572338910937, guid: 3a88b09fcdbecf849a95dc025728e335,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.03
+      value: 1.077
       objectReference: {fileID: 0}
     - target: {fileID: 8510327572338910937, guid: 3a88b09fcdbecf849a95dc025728e335,
         type: 3}
@@ -1100,6 +1111,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8510327572338910941, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 386007832}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a88b09fcdbecf849a95dc025728e335, type: 3}
 --- !u!1 &1970275585 stripped
@@ -1115,6 +1131,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 570125955029386645, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: m_Name
+      value: gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 570125955029386645, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 3338982158843672526, guid: 4fcb4eafa622921479898614a630e081,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1123,7 +1149,7 @@ PrefabInstance:
     - target: {fileID: 3338982158843672526, guid: 4fcb4eafa622921479898614a630e081,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.14
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: 3338982158843672526, guid: 4fcb4eafa622921479898614a630e081,
         type: 3}
@@ -1180,5 +1206,47 @@ PrefabInstance:
       propertyPath: fireRate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 3338982159253391997}
+    - target: {fileID: 7626720962639901429, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: m_IgnoreFromBuild
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626720962639901429, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: m_OverrideArea
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
+--- !u!1 &3338982159253391997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 570125955029386645, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 3338982159253391996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3338982159253391998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3338982159253391997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f7d0b22373d0044a654cd08974ceb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 9133957338609727064, guid: e2ff0ff1826cad044866d2ddbdd33b11,
+    type: 3}
+  damage: 10
+  reloadSpeed: 2
+  totalAmmo: -1
+  magSize: 5
+  ammoInMag: 5
+  fireRate: 1
+  type: 0

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 5151476063203987106}
   - component: {fileID: 6693113323892980863}
   - component: {fileID: 7639592138670312942}
+  - component: {fileID: 4965316014334196321}
   m_Layer: 0
-  m_Name: pointer
+  m_Name: weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,6 +80,27 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4965316014334196321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570125955029386645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f7d0b22373d0044a654cd08974ceb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 9133957338609727064, guid: e2ff0ff1826cad044866d2ddbdd33b11,
+    type: 3}
+  damage: 10
+  reloadSpeed: 2
+  totalAmmo: -1
+  magSize: 5
+  ammoInMag: 5
+  fireRate: 1
+  type: 1
 --- !u!1 &3338982158843672528
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +115,7 @@ GameObject:
   - component: {fileID: 3338982158843672531}
   - component: {fileID: 3338982158843672530}
   - component: {fileID: 3338982158843672529}
+  - component: {fileID: 7626720962639901429}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -217,6 +240,8 @@ MonoBehaviour:
   distanceToTarget: {x: 0, y: 0, z: 0}
   distance: 0
   fireRange: 10
+  gun: {fileID: 570125955029386645}
+  gunDamage: 10
   directionDurationMax: 2
   directionDurationMin: 0.5
   patrolDir: 0
@@ -229,3 +254,19 @@ MonoBehaviour:
   InRangeToFire: 0
   rotationSpeed: 5
   gunLoc: {fileID: 570125955029386645}
+--- !u!114 &7626720962639901429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3338982158843672528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

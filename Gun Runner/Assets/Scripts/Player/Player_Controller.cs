@@ -13,6 +13,8 @@ public class Player_Controller : MonoBehaviour
     public GameObject gunLoc;//the location that the bullets are fired from
     public GameObject bulletPrefab;
 
+    public GameObject weapon;
+
     [Header("Shooting Detection Range")]
     public float shootingDetectionRadius = 20f;
     Transform[] _proxEnemies;
@@ -52,12 +54,13 @@ public class Player_Controller : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
-            bullet.GetComponent<Bullet>().type = shootType.player;
+            weapon.GetComponent<Weapon>().Shooting();
+            //GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
+            //bullet.GetComponent<Bullet>().type = shootType.player;
             ShootingDetection();
-            Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
-            Destroy(bullet, 3f);
+            //Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            //rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
+            //Destroy(bullet, 3f);
         }
     }
 
