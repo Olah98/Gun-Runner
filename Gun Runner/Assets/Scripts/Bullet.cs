@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
         //enemy bullets wont destory when it hits who shot it
         if(type == shootType.enemy)
         {
-            if(other.tag != "Enemy" && other.tag != "Bullet")
+            if(other.tag != "Enemy" && other.tag != "Bullet" && other.tag != "Weapon")
             {
                 Destroy(gameObject);
             }
@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
         //player bullets wont hit player who shot it
         if (type == shootType.player)
         {
-            if(other.tag != "Player" && other.tag != "Bullet")
+            if(other.tag != "Player" && other.tag != "Bullet" && other.tag != "Weapon")
             {
                 Destroy(gameObject);
             }
