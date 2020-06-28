@@ -35,6 +35,10 @@ public class AIPathingBase : MonoBehaviour
     [Header("Fire Range")]
     public float fireRange = 9f;
 
+    [Header("Equiped Gun Type")]
+    public GameObject gun;
+    public int gunDamage = 10;
+
     [Header("Idle Movement var")]
     public float directionDurationMax;
     public float directionDurationMin;
@@ -75,7 +79,8 @@ public class AIPathingBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = this.GetComponent<NavMeshAgent>().speed;
+        SetGun();
+        this.GetComponent<NavMeshAgent>().speed = speed;
         _speedMin = speed / 2;
         _speedMax = speed;
         _currentUsedSpeed = Random.Range(_speedMin, _speedMax);
@@ -140,6 +145,12 @@ public class AIPathingBase : MonoBehaviour
         StartCoroutine(changeDirections());
     }
 
+    void SetGun()
+    {
+
+        //gun struct will have damage, speed, reload, firerate ect
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -201,17 +212,47 @@ public class AIPathingBase : MonoBehaviour
                 
             }
         }
+
+        if(health <= 0)
+        {
+            //enemy is dead
+            OnDeath();
+        }
+    }
+
+    //when it dies
+    void OnDeath()
+    {
+        //do stuff here
+
+        Destroy(this.gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Bullet" && collision.gameObject.GetComponent<Bullet>().type == shootType.player)
+        {
+            //health -= collision.gameObject.GetComponent<Bullet>().damage;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Bullet" && other.GetComponent<Bullet>().type == shootType.player)
+        {
+            health -= other.GetComponent<Bullet>().damage;
+        }
     }
 
     //rooty shooty mc tooty
     void FireBullet()
     {
         //fire projectile forward (at player or poi)
-        Debug.Log("shoot");
+        //Debug.Log("shoot");
         GameObject bullet = Instantiate(projectile, gunLoc.transform.position, gunLoc.transform.rotation);
         //set any variables HERE
-
-
+        bullet.GetComponent<Bullet>().type = shootType.enemy;
+        bullet.GetComponent<Bullet>().damage = gunDamage;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
         counter = 0.0f;

@@ -53,6 +53,7 @@ public class Player_Controller : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
+            bullet.GetComponent<Bullet>().type = shootType.player;
             ShootingDetection();
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
