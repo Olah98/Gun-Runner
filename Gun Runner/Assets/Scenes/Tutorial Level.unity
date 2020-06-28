@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bfe2631c9d66224396cab4619e8eafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: Gun Runner
+  nextLevel: Prototype1_End
 --- !u!65 &593329358
 BoxCollider:
   m_ObjectHideFlags: 0
