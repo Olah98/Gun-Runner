@@ -57,6 +57,7 @@ public class AIPathingBase : MonoBehaviour
     private float _speedMax;
     
     public float fireRate;
+    private float _fireRateSet;
     private float counter = 0f;
     [Header("Bullet prefab")]
     public GameObject projectile;
@@ -79,6 +80,8 @@ public class AIPathingBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _fireRateSet = fireRate;
+        fireRate = Random.Range(0.5f, _fireRateSet + (_fireRateSet * 0.1f));
         SetGun();
         this.GetComponent<NavMeshAgent>().speed = speed;
         _speedMin = speed / 2;
@@ -169,10 +172,15 @@ public class AIPathingBase : MonoBehaviour
             //if target is close enough and we have line of sight
             if (LineOfSight() && CheckPOIDistance())
             {
+                //when line of sight is found, enemy will have a chance to randomly also move towards the target (speed can vary from 0 - max speed)
+                //
+
                 this.transform.LookAt(_poi);
                 //if(LineOfSightMade)
                 //{
-                agent.isStopped = true;
+                //agent.isStopped = true;
+                this.GetComponent<NavMeshAgent>().speed = Random.Range(0f, speed - (speed * 0.5f));
+
                     //shooting starts here
                     //while we can shoot, there will be a timer that runs between each shot
                     counter += Time.deltaTime;
@@ -186,6 +194,7 @@ public class AIPathingBase : MonoBehaviour
             else
             {
                 agent.isStopped = false;
+                this.GetComponent<NavMeshAgent>().speed = speed;
                 //else
                 //move towards target
                 //agent.SetDestination(_poi.position);
@@ -260,6 +269,8 @@ public class AIPathingBase : MonoBehaviour
         //Rigidbody rb = bullet.GetComponent<Rigidbody>();
         //rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
         counter = 0.0f;
+        //slight variation in firing
+        fireRate = Random.Range(1f, _fireRateSet + (_fireRateSet * 0.1f));//_fireRateSet - (_fireRateSet * 0.1f), _fireRateSet + (_fireRateSet * 0.1f));
     }
 
     //UNUSED
