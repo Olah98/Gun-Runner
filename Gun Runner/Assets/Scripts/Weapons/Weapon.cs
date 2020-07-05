@@ -11,8 +11,8 @@ public class Weapon : MonoBehaviour
     [Header("Reload Speed")]
     public int reloadSpeed;
     //if weapon is currently reloading, cant fire (maybe play sound effect instead if its true for better indication)
-    private bool _currentlyReloading;
-    private bool _fireCoolDown;
+    protected bool _currentlyReloading;
+    protected bool _fireCoolDown;
     [Header("Total Ammo")]
     public int totalAmmo;
     [Header("Mag")]
@@ -50,14 +50,14 @@ public class Weapon : MonoBehaviour
         
     }
 
-    IEnumerator FireCoolDown()
+    protected IEnumerator FireCoolDown()
     {
         _fireCoolDown = true;
         yield return new WaitForSeconds(fireRate);
         _fireCoolDown = false;
     }
 
-    IEnumerator Reloading()
+    protected IEnumerator Reloading()
     {
         Debug.Log("Reloading");
         _currentlyReloading = true;

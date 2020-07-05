@@ -21,6 +21,8 @@ public class AIPathingBase : MonoBehaviour
     Transform[] _nearbyEnemies;
 
     public NavMeshAgent agent;
+    [Header("Rotation Waist that tracks poi")]
+    public GameObject trackingObj;
 
     [Header("The Radius of The Attack Range")]
     public float checkRadius = 10f;
@@ -55,6 +57,7 @@ public class AIPathingBase : MonoBehaviour
     private float _currentUsedSpeed;
     private float _speedMin;
     private float _speedMax;
+    public float trackingSpeed;
     
     public float fireRate;
     private float _fireRateSet;
@@ -70,6 +73,10 @@ public class AIPathingBase : MonoBehaviour
     private int _currentIndex = 0;
     private float _reachDistance = 1.0f;
     private bool _isDone = false;
+    private float _rangeStop;
+
+    private bool _attackCycle = false;
+    //private bool 
 
     public float rotationSpeed = 5.0f;
     [Header("Location bullets are fired from")]
@@ -80,6 +87,7 @@ public class AIPathingBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _rangeStop = Random.Range(0.4f, 0.7f);
         _fireRateSet = fireRate;
         fireRate = Random.Range(0.5f, _fireRateSet + (_fireRateSet * 0.1f));
         SetGun();
@@ -158,7 +166,7 @@ public class AIPathingBase : MonoBehaviour
     void Update()
     {
         //if target is destoryed or doesnt exist, we check for a target
-        if(_poi == null || !_poi.gameObject.activeInHierarchy)
+        if (_poi == null || !_poi.gameObject.activeInHierarchy)
         {
             patrolMovement();
             //aquire target
@@ -168,44 +176,28 @@ public class AIPathingBase : MonoBehaviour
         else
         {
             //we have target
-            
-            //if target is close enough and we have line of sight
-            if (LineOfSight() && CheckPOIDistance())
+            if (_attackCycle)
             {
-                //when line of sight is found, enemy will have a chance to randomly also move towards the target (speed can vary from 0 - max speed)
-                //
-
-                this.transform.LookAt(_poi);
-                //if(LineOfSightMade)
-                //{
-                //agent.isStopped = true;
-                this.GetComponent<NavMeshAgent>().speed = Random.Range(0f, speed - (speed * 0.5f));
-
-                    //shooting starts here
-                    //while we can shoot, there will be a timer that runs between each shot
-                    counter += Time.deltaTime;
-                    if (counter >= fireRate)
-                    {
-                        FireBullet();
-                    }
-                //}
-                
+                 this.GetComponent<NavMeshAgent>().speed = Random.Range(-(speed * 0.2f), speed - (speed * 0.5f));
+                _attackCycle = false;
+            }
+            
+            if (distance <= (checkRadius * _rangeStop))
+            {
+                this.GetComponent<NavMeshAgent>().speed = 0;
             }
             else
-            {
-                agent.isStopped = false;
                 this.GetComponent<NavMeshAgent>().speed = speed;
-                //else
-                //move towards target
-                //agent.SetDestination(_poi.position);
-                //float step = 15 * speed * Time.deltaTime;
-                
 
+            if (CheckPOIDistance())
+            {
+                _attackCycle = false;
+                agent.isStopped = false;
+                 
                 //update path to target
                 path = new NavMeshPath();
-                if(NavMesh.CalculatePath(transform.position, _poi.position, NavMesh.AllAreas, path))
+                if (NavMesh.CalculatePath(transform.position, _poi.position, NavMesh.AllAreas, path))
                 {
-                    //Debug.Log(path.corners.Length);
                     //draw path
                     //set it
                     agent.SetPath(path);
@@ -214,12 +206,27 @@ public class AIPathingBase : MonoBehaviour
                         Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.green);
                     }
                 }
+                var rotation = Quaternion.LookRotation(_poi.position - trackingObj.transform.position);
+                trackingObj.transform.rotation = Quaternion.Slerp(trackingObj.transform.rotation, rotation, Time.deltaTime * trackingSpeed);
 
-                //follow path to target
-                //agent.SetDestination(Vector3.MoveTowards(transform.position,_poi.position, step));
-                //DoMovement();
-                
+                //if target is close enough and we have line of sight
+                if (LineOfSight())
+                {        
+                    //shooting starts here
+                    //while we can shoot, there will be a timer that runs between each shot
+                    counter += Time.deltaTime;
+                    if (counter >= fireRate)
+                    {
+                        FireBullet();
+                    }
+                }
+                else
+                {
+
+                }
+
             }
+
         }
 
         if(health <= 0)
@@ -227,6 +234,7 @@ public class AIPathingBase : MonoBehaviour
             //enemy is dead
             OnDeath();
         }
+
     }
 
     //when it dies
@@ -307,33 +315,39 @@ public class AIPathingBase : MonoBehaviour
         {
             attackMode = true;
         }
-
+        InRangeToFire = attackMode;
+        
         return attackMode;
     }
-
+    //if have line of sight of player
     bool LineOfSight()
     {
         bool hitTarget = false;
         RaycastHit lineOfSight;
 
         Vector3 forward = transform.TransformDirection(Vector3.forward) * fireRange;
-        
+
         //Vector3 left = transform.TransformDirection(new Vector3(0, 0, 0.5f)) * fireRange;
         //Vector3 right = transform.TransformDirection(new Vector3(0, 0, 1.5f)) * fireRange;
 
-        
+
 
         //have 3 raycasts total, one dead center, one slightly left and slightly right
-        Vector3 left = new Vector3(transform.position.x + 0.2f, transform.position.y, transform.position.z);
-        Vector3 right = new Vector3(transform.position.x - 0.2f, transform.position.y, transform.position.z);
+        //Vector3 left = new Vector3(trackingObj.transform.position.x + 0.2f, trackingObj.transform.position.y, trackingObj.transform.position.z);
+        //Vector3 right = new Vector3(trackingObj.transform.position.x - 0.2f, trackingObj.transform.position.y, trackingObj.transform.position.z);
+        Vector3 eulerAngles = new Vector3(0, 4f, 0);
+        Vector3 directionLeft = Quaternion.Euler(eulerAngles) * trackingObj.transform.forward;
+        eulerAngles = new Vector3(0, -4f, 0);
+        Vector3 directionRight = Quaternion.Euler(eulerAngles) * trackingObj.transform.forward;
 
-        Debug.DrawRay(transform.position, forward, Color.red);
-        Debug.DrawRay(left, forward, Color.red);
-        Debug.DrawRay(right, forward, Color.red);
+        //Vector3 forwardV = trackingObj.transform.TransformDirection(trackingObj.transform.forward) * 10;
+        Debug.DrawRay(trackingObj.transform.position, directionLeft * checkRadius, Color.red);
+        Debug.DrawRay(trackingObj.transform.position, directionRight * checkRadius, Color.red);
+        Debug.DrawRay(trackingObj.transform.position, trackingObj.transform.forward * checkRadius, Color.red);
 
 
         //if we hit something, check to see if its player
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out lineOfSight, Mathf.Infinity) || Physics.Raycast(left, transform.TransformDirection(Vector3.forward), out lineOfSight, Mathf.Infinity) || Physics.Raycast(right, transform.TransformDirection(Vector3.forward), out lineOfSight, Mathf.Infinity))
+        if (Physics.Raycast(trackingObj.transform.position, trackingObj.transform.forward, out lineOfSight, Mathf.Infinity)|| Physics.Raycast(trackingObj.transform.position, directionLeft, out lineOfSight, Mathf.Infinity) || Physics.Raycast(trackingObj.transform.position, directionRight, out lineOfSight, Mathf.Infinity))
         {
             if (lineOfSight.collider.tag == "Player")
             {
@@ -342,11 +356,16 @@ public class AIPathingBase : MonoBehaviour
             else
                 hitTarget = false;
         }
+        LineOfSightMade = hitTarget;
+   
+
+        if (hitTarget == true)
+            _attackCycle = false;
 
         return hitTarget;
     }
 
-    bool Tracking()
+    bool Trackings()
     {
         bool hitTarget = false;
         RaycastHit tracking;
@@ -387,7 +406,7 @@ public class AIPathingBase : MonoBehaviour
             }
         }
         //Debug.Log(closestDistanceSqr);
-
+        _attackCycle = true;
         return bestTarget;
 
     }
