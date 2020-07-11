@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+
+public enum weaponType
+{
+    pistol,
+    shotgun,
+    assaltRifle,
+    DMR
+}
+
 public class Weapon : MonoBehaviour
 {
     [Header("Weapon Bullet Type")]
@@ -20,6 +31,7 @@ public class Weapon : MonoBehaviour
     public int ammoInMag;
     [Header("Fire Rate")]
     public float fireRate;
+    
 
     [Header("Who shooting this bitch?")]
     public shootType type;
@@ -50,14 +62,14 @@ public class Weapon : MonoBehaviour
         
     }
 
-    protected IEnumerator FireCoolDown()
+    public IEnumerator FireCoolDown()
     {
         _fireCoolDown = true;
         yield return new WaitForSeconds(fireRate);
         _fireCoolDown = false;
     }
 
-    protected IEnumerator Reloading()
+    public IEnumerator Reloading()
     {
         Debug.Log("Reloading");
         _currentlyReloading = true;

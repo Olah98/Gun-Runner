@@ -10,7 +10,7 @@ public class Player_Controller : MonoBehaviour
     [Header ("Player Vars")]
     //this is the playes move speed
     public float moveSpeed;
-    public GameObject gunLoc;//the location that the bullets are fired from
+    //public GameObject gunLoc;//the location that the bullets are fired from
     public GameObject bulletPrefab;
 
     public GameObject weapon;
@@ -19,11 +19,12 @@ public class Player_Controller : MonoBehaviour
     public float shootingDetectionRadius = 20f;
     Transform[] _proxEnemies;
 
+    public weaponType gunType;
 
     private void Awake()
     {
         playerCam = Camera.main;
-        gunLoc = this.transform.GetChild(0).gameObject;
+        //gunLoc = this.transform.GetChild(0).gameObject;
     }
     void Update()
     {
@@ -54,7 +55,10 @@ public class Player_Controller : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            weapon.GetComponent<Weapon>().Shooting();
+            if (gunType == weaponType.pistol)
+                weapon.GetComponent<Weapon>().Shooting();
+            else if (gunType == weaponType.shotgun)
+                weapon.GetComponent<ShotgunWeapon>().Shooting();
             //GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
             //bullet.GetComponent<Bullet>().type = shootType.player;
             ShootingDetection();

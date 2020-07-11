@@ -227,6 +227,36 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 164139072043894691, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 523541741780769613, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1147054397655882332, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014771525412919500, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: spreadAngle
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014771525412919500, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: barrelExit
+      value: 
+      objectReference: {fileID: 1245606648}
+    - target: {fileID: 6014771525412919500, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: pelletVelocity
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 8510327572338910937, guid: 3a88b09fcdbecf849a95dc025728e335,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -287,7 +317,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8887474382362257082, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.631
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3825699048535016361, guid: 3a88b09fcdbecf849a95dc025728e335, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3a88b09fcdbecf849a95dc025728e335, type: 3}
 --- !u!1 &327348372 stripped
 GameObject:
@@ -1374,6 +1410,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
+--- !u!1 &1245606648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1799052910317322892, guid: 3a88b09fcdbecf849a95dc025728e335,
+    type: 3}
+  m_PrefabInstance: {fileID: 327348371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1335600337
 GameObject:
   m_ObjectHideFlags: 0

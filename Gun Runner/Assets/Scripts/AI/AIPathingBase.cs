@@ -64,6 +64,7 @@ public class AIPathingBase : MonoBehaviour
     private float counter = 0f;
     [Header("Bullet prefab")]
     public GameObject projectile;
+    public weaponType gunType;
     [Header("Viewing player")]
     public bool LineOfSightMade = false;
     public bool InRangeToFire = false;
@@ -264,8 +265,14 @@ public class AIPathingBase : MonoBehaviour
     //rooty shooty mc tooty
     void FireBullet()
     {
+        //Weapon w = new Weapon();
+        //Weapon w = this.GetComponent<Weapon>();
         //new system
-        gun.GetComponent<Weapon>().Shooting();
+        if (gunType == weaponType.pistol)
+            gun.GetComponent<Weapon>().Shooting();
+        else if (gunType == weaponType.shotgun)
+            gun.GetComponent<ShotgunWeapon>().Shooting();
+
 
 
         //old system

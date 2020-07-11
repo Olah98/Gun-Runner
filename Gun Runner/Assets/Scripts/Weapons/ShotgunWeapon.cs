@@ -7,26 +7,52 @@ public class ShotgunWeapon : Weapon
     public int pelletCountMax;
     public int pelletCountMin;
 
-    public int spreadRadius;
+    //public int spreadRadius;
+    public float spreadAngle;
+    List<Quaternion> pellets;
+    public GameObject barrelExit;
+
+    public float pelletVelocity;
+
+    private void Awake()
+    {
+       
+    }
 
     public override void Shooting()
     {
-        int pelletNum = Random.Range(pelletCountMin, pelletCountMax);
+        
+
         //base.Shooting();
         //shoots
         if (!_currentlyReloading && !_fireCoolDown)
         {
+            //establish list
+            int pelletNum = Random.Range(pelletCountMin, pelletCountMax);
+            pellets = new List<Quaternion>(pelletNum);
+            for (int a = 0; a < pelletNum; a++)
+            {
+                pellets.Add(Quaternion.Euler(Vector3.zero));
+
+            }
+
+            //fire shot
             Debug.Log("PEW");
             ammoInMag--;
-            for (int count = 0; count <= pelletNum; count++)
+            //int i = 0;
+            for(int c = 0; c < pellets.Count; c++)
+            //foreach(Quaternion quat in pellets)
             {
-                GameObject bullet = Instantiate(projectile, this.transform.position, this.transform.rotation);
+                pellets[c] = Random.rotation;
+                GameObject bullet = Instantiate(projectile, barrelExit.transform.position, barrelExit.transform.rotation);
                 //set variables to bullet
+                bullet.transform.rotation = Quaternion.RotateTowards(bullet.transform.rotation, Random.rotation, spreadAngle);
                 bullet.GetComponent<Bullet>().type = type;
                 bullet.GetComponent<Bullet>().damage = damage;
-                Rigidbody rb = bullet.GetComponent<Rigidbody>();
-                rb.AddForce(this.transform.forward * 10, ForceMode.Impulse);
+                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * pelletVelocity);
+                c++;
             }
+
             StartCoroutine(FireCoolDown());
             if (ammoInMag <= 0)
             {
