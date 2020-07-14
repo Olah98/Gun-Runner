@@ -26,6 +26,7 @@ public class AIPathingBase : MonoBehaviour
 
     [Header("The Radius of The Attack Range")]
     public float checkRadius = 10f;
+    public float stopDistance;
 
     [Header("Health of enemy")]
     public int health = 100;
@@ -58,7 +59,7 @@ public class AIPathingBase : MonoBehaviour
     private float _speedMin;
     private float _speedMax;
     public float trackingSpeed;
-    
+    [Header("How often it fires")]
     public float fireRate;
     private float _fireRateSet;
     private float counter = 0f;
@@ -78,10 +79,16 @@ public class AIPathingBase : MonoBehaviour
 
     private bool _attackCycle = false;
     //private bool 
-
+    [Header("How fast enemy rotates")]
     public float rotationSpeed = 5.0f;
-    [Header("Location bullets are fired from")]
-    public GameObject gunLoc;
+    //[Header("Location bullets are fired from")]
+    //public GameObject gunLoc;
+
+    private bool _firing = false;
+    [Header("Fire durations")]
+    public float triggerTimeMin = 1.0f;
+    public float triggerTimeMax = 1.5f;
+
 
     //patrol will be either moving one direction or anthor
 
@@ -183,7 +190,7 @@ public class AIPathingBase : MonoBehaviour
                 _attackCycle = false;
             }
             
-            if (distance <= (checkRadius * _rangeStop))
+            if (distance <= stopDistance)//(checkRadius * _rangeStop))
             {
                 this.GetComponent<NavMeshAgent>().speed = 0;
             }
@@ -218,16 +225,21 @@ public class AIPathingBase : MonoBehaviour
                     counter += Time.deltaTime;
                     if (counter >= fireRate)
                     {
-                        FireBullet();
+                        if (gunType == weaponType.assaultRifle)
+                            StartCoroutine(HoldTrigger());
+                        else
+                            FireBullet();
                     }
                 }
-                else
-                {
 
-                }
 
             }
 
+        }
+
+        if(_firing)
+        {
+            FireBullet();
         }
 
         if(health <= 0)
@@ -262,6 +274,8 @@ public class AIPathingBase : MonoBehaviour
         }
     }
 
+
+
     //rooty shooty mc tooty
     void FireBullet()
     {
@@ -269,10 +283,17 @@ public class AIPathingBase : MonoBehaviour
         //Weapon w = this.GetComponent<Weapon>();
         //new system
         if (gunType == weaponType.pistol)
-            gun.GetComponent<Weapon>().Shooting();
+            gun.GetComponent<PistolWeapon>().Shooting();
         else if (gunType == weaponType.shotgun)
             gun.GetComponent<ShotgunWeapon>().Shooting();
-
+        else if (gunType == weaponType.assaultRifle)
+        {
+            gun.GetComponent<AssaultRifle>().Shooting();
+        }
+        else if(gunType == weaponType.DMR)
+        {
+            gun.GetComponent<DMRWeapon>().Shooting();
+        }
 
 
         //old system
@@ -523,5 +544,13 @@ public class AIPathingBase : MonoBehaviour
     {
         //when player fires shot and enemy is in range, it sets the poi
         _poi = poi;
+    }
+
+    //some weapons have continueous fire (like assaault and dmrs)
+    IEnumerator HoldTrigger()
+    {
+        _firing = true;
+        yield return new WaitForSeconds(Random.Range(triggerTimeMin, triggerTimeMax));
+        _firing = false;
     }
 }

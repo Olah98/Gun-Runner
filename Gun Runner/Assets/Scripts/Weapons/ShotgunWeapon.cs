@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class ShotgunWeapon : Weapon
 {
+    [Header("Shotgun Pellet Count")]
     public int pelletCountMax;
     public int pelletCountMin;
 
+    [Header("Spread of blast")]
     //public int spreadRadius;
     public float spreadAngle;
     List<Quaternion> pellets;
+    [Header("Where bullets come out")]
     public GameObject barrelExit;
-
+    [Header("Pellet Speed")]
     public float pelletVelocity;
-
-    private void Awake()
-    {
-       
-    }
 
     public override void Shooting()
     {

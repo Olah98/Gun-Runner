@@ -52,6 +52,24 @@ public class Player_Controller : MonoBehaviour
 
     void shootCurGun()
     {
+        if (Input.GetMouseButton(0))
+        {
+            if (gunType == weaponType.pistol)
+                weapon.GetComponent<PistolWeapon>().Shooting();
+            else if (gunType == weaponType.shotgun)
+                weapon.GetComponent<ShotgunWeapon>().Shooting();
+            else if (gunType == weaponType.assaultRifle)
+            {
+                weapon.GetComponent<AssaultRifle>().Shooting();
+            }
+            else if (gunType == weaponType.DMR)
+            {
+                weapon.GetComponent<DMRWeapon>().Shooting();
+            }
+            //GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
+            //bullet.GetComponent<Bullet>().type = shootType.player;
+            ShootingDetection();
+        }
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -59,6 +77,14 @@ public class Player_Controller : MonoBehaviour
                 weapon.GetComponent<Weapon>().Shooting();
             else if (gunType == weaponType.shotgun)
                 weapon.GetComponent<ShotgunWeapon>().Shooting();
+            else if (gunType == weaponType.assaultRifle)
+            {
+
+            }
+            else if (gunType == weaponType.DMR)
+            {
+
+            }
             //GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
             //bullet.GetComponent<Bullet>().type = shootType.player;
             ShootingDetection();
@@ -66,6 +92,7 @@ public class Player_Controller : MonoBehaviour
             //rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
             //Destroy(bullet, 3f);
         }
+        
     }
 
 

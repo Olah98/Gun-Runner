@@ -9,7 +9,7 @@ public enum weaponType
 {
     pistol,
     shotgun,
-    assaltRifle,
+    assaultRifle,
     DMR
 }
 
