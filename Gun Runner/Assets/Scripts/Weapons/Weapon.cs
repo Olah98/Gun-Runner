@@ -2,7 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/// ******In order for a weapon to be properly equiped the weapon itself (the object attached to the player or ai), must have the type set correctly. (enum)*****
+///  - the gun object must be set up in the scene properly so that it is facing forward from the player as if they are holding it. 
+/// 
+/// PLAYER SETUP
+///  - On the player gameobject the Player_controller script must have gun type (enum) set correctly as well as the weapon to be dragged in or set on the weapon gameobject variable (gameobject)
+///  - the weapon currently in use is the only one that should be active in the hierarchy
+///  
+/// ENEMY AI SETUP
+///  - On the enemy ai under the AI pathing base script, under the gun variables the gun type should be set correctly (enum)
+///  - the gun prefab attacted to the enemy in the heirarchy must also be dragged into the gun gameobject (aka the equiped gun type)
+/// 
+/// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/// </summary>
 
 
 public enum weaponType
@@ -32,13 +46,11 @@ public class Weapon : MonoBehaviour
     [Header("Fire Rate")]
     public float fireRate;
     
-
     [Header("Who shooting this bitch?")]
     public shootType type;
     
     //shotgun will inherit weapon
     //will have spread and number of pellets (range)
-
     public virtual void Shooting()
     {
         //shoots

@@ -19,8 +19,6 @@ public class ShotgunWeapon : Weapon
 
     public override void Shooting()
     {
-        
-
         //base.Shooting();
         //shoots
         if (!_currentlyReloading && !_fireCoolDown)

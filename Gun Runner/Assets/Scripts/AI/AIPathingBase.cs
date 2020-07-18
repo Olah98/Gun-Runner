@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-
+//directional enum (for random movements if patrol is off)
 public enum direction
 {
     up,
@@ -20,45 +20,73 @@ public class AIPathingBase : MonoBehaviour
 
     Transform[] _nearbyEnemies;
 
+    [Header("Tracking and Pathfinding")]
     public NavMeshAgent agent;
     [Header("Rotation Waist that tracks poi")]
     public GameObject trackingObj;
-
     [Header("The Radius of The Attack Range")]
-    public float checkRadius = 10f;
+    //[Range(5, 20)]
+    public float checkRadius = 10f; //10 seems to work well
     public float stopDistance;
-
-    [Header("Health of enemy")]
-    public int health = 100;
     [Header("Target")]
-    public Transform _poi;
+    private Transform _poi;
     public Vector3 distanceToTarget;
     [Header("Distance to target")]
     public float distance;
-    [Header("Fire Range")]
-    public float fireRange = 9f;
+    [Header("How fast it moves")]
+    public float speed;
+    private float _currentUsedSpeed;
+    //used for offering more varety in speeds randomly for enemy
+    private float _speedMin;
+    private float _speedMax;
+    //how fast ai tracks target
+    [Header("How fast ai tracks target")]
+    public float trackingSpeed;
+    [Header("How fast enemy rotates")]
+    public float rotationSpeed = 5.0f;
+    [Space(20)]
 
-    [Header("Equiped Gun Type")]
-    public GameObject gun;
-    public int gunDamage = 10;
 
+    [Header("Set enemy to idle or patrol idle")]
+    public bool canPatrol = true;
+    [Space(2)]
     [Header("Idle Movement var")]
+    //amounts of time it moves in random directions before changing
     public float directionDurationMax;
     public float directionDurationMin;
-
     [Header("Current Direction facing")]
     public direction patrolDir;
     direction _opposite;
     direction _current;
-    [Header("Set enemy to idle or patrol idle")]
-    public bool canPatrol = true;
+    [Space(2)]
+    //patrolling stuff
+    [SerializeField]
+    [Header("Patroling")]
+    private bool _isDone = false;
+    private Vector3 _lastPosition;
+    private Vector3 _currentPosition;
+    [Header("Patrol Path (must be DrawPath obj if patrol is on)")]
+    public DrawPath pathToFollow;
+    private NavMeshPath path;
+    private bool _isPatroling;
+    private int _currentIndexPatrol = 0;
+    private float _reachDistancePatrol = 1.0f;
+    private bool _isDonePatrol = false;
+    private float _rangeStop;
+    //distance before ai switches to next patrol target
+    private float _reachDistance = 0.5f;
+    //current patrol target
+    private int _currentIndex = 0;
 
-    [Header("How fast it moves")]
-    public float speed;
-    private float _currentUsedSpeed;
-    private float _speedMin;
-    private float _speedMax;
-    public float trackingSpeed;
+    [Space(5)]
+    [Header("Health of enemy")]
+    public int health = 100;
+    
+    [Space(15)]
+    [Header("Gun Varaibles")]
+    public int gunDamage = 10;
+    [Header("Fire Range")]
+    public float fireRange = 9f;
     [Header("How often it fires")]
     public float fireRate;
     private float _fireRateSet;
@@ -66,31 +94,30 @@ public class AIPathingBase : MonoBehaviour
     [Header("Bullet prefab")]
     public GameObject projectile;
     public weaponType gunType;
-    [Header("Viewing player")]
-    public bool LineOfSightMade = false;
-    public bool InRangeToFire = false;
-
-    private NavMeshPath path;
-
-    private int _currentIndex = 0;
-    private float _reachDistance = 1.0f;
-    private bool _isDone = false;
-    private float _rangeStop;
-
-    private bool _attackCycle = false;
-    //private bool 
-    [Header("How fast enemy rotates")]
-    public float rotationSpeed = 5.0f;
-    //[Header("Location bullets are fired from")]
-    //public GameObject gunLoc;
-
+    [Header("Equiped Gun Type")]
+    public GameObject gun;
+    
     private bool _firing = false;
     [Header("Fire durations")]
     public float triggerTimeMin = 1.0f;
     public float triggerTimeMax = 1.5f;
 
+    [Header("Viewing player")]
+    private bool LineOfSightMade = false;
+    private bool InRangeToFire = false;
 
-    //patrol will be either moving one direction or anthor
+    private bool _attackCycle = false;
+    //private bool 
+    
+
+
+    //patrol will follow path, once it reaches its last node it will either go to the first node or go backwards
+    private void Awake()
+    {
+        _lastPosition = transform.position;
+        //_isMoving = false;
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -176,7 +203,11 @@ public class AIPathingBase : MonoBehaviour
         //if target is destoryed or doesnt exist, we check for a target
         if (_poi == null || !_poi.gameObject.activeInHierarchy)
         {
-            patrolMovement();
+            if (!canPatrol)
+                patrolMovement();
+            else
+                patrolMovement2();
+
             //aquire target
             _poi = GetClosestEnemy();
 
@@ -465,6 +496,36 @@ public class AIPathingBase : MonoBehaviour
         return directionToTarget.sqrMagnitude;
     }
 
+    //set patrol path
+    void patrolMovement2()
+    {
+        float distance = Vector3.Distance(pathToFollow.pathPoints[_currentIndexPatrol].position, transform.position);
+        transform.position = Vector3.MoveTowards(transform.position, pathToFollow.pathPoints[_currentIndexPatrol].position, Time.deltaTime * speed);
+
+        if (pathToFollow.pathPoints[_currentIndexPatrol].position - transform.position != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(pathToFollow.pathPoints[_currentIndexPatrol].position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        }
+
+        if (distance <= _reachDistance && _currentIndexPatrol < pathToFollow.pathPoints.Count - 1)
+        {
+            if (!_isDonePatrol)
+            {
+                _currentIndexPatrol++;
+
+                Debug.Log(pathToFollow.pathPoints.Count);
+                if (_currentIndexPatrol == pathToFollow.pathPoints.Count - 1)
+                    _currentIndexPatrol = 0;
+            }
+            else
+            {
+                _isDonePatrol = true;
+            }
+        }
+    }
+
+    //random movement
     void patrolMovement()
     {
         switch (_current)
@@ -496,7 +557,6 @@ public class AIPathingBase : MonoBehaviour
         if(_current != direction.stop)
             agent.transform.Translate(Vector3.forward * _currentUsedSpeed * Time.deltaTime);
     }
-
     IEnumerator changeDirections()
     {
         
