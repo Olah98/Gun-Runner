@@ -7,13 +7,13 @@ public class Player_Controller : MonoBehaviour
     //this is the main camera that fouces onto the player
     Camera playerCam;
 
-    [Header ("Player Vars")]
+    [Header("Player Vars")]
     //this is the playes move speed
     public float moveSpeed;
     //public GameObject gunLoc;//the location that the bullets are fired from
     public GameObject bulletPrefab;
 
-    public GameObject weapon;
+    public PlayerWeapom weapon;
 
     [Header("Shooting Detection Range")]
     public float shootingDetectionRadius = 20f;
@@ -21,9 +21,13 @@ public class Player_Controller : MonoBehaviour
 
     public weaponType gunType;
 
+    public PlayerInventory myBag;
+
     private void Awake()
     {
         playerCam = Camera.main;
+        myBag = FindObjectOfType<PlayerInventory>();
+        gunType = myBag.currnetWeapon;
         //gunLoc = this.transform.GetChild(0).gameObject;
     }
     void Update()
@@ -31,6 +35,7 @@ public class Player_Controller : MonoBehaviour
         lookAround();
         moveAround();
         shootCurGun();
+        changeGun();
 
     }
 
@@ -54,6 +59,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            /*
             if (gunType == weaponType.pistol)
                 weapon.GetComponent<PistolWeapon>().Shooting();
             else if (gunType == weaponType.shotgun)
@@ -69,30 +75,45 @@ public class Player_Controller : MonoBehaviour
             //GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
             //bullet.GetComponent<Bullet>().type = shootType.player;
             ShootingDetection();
-        }
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (gunType == weaponType.pistol)
-                weapon.GetComponent<Weapon>().Shooting();
-            else if (gunType == weaponType.shotgun)
-                weapon.GetComponent<ShotgunWeapon>().Shooting();
-            else if (gunType == weaponType.assaultRifle)
-            {
-
-            }
-            else if (gunType == weaponType.DMR)
-            {
-
-            }
-            //GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
-            //bullet.GetComponent<Bullet>().type = shootType.player;
+            */
+            weapon.Shooting();
             ShootingDetection();
-            //Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            //rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
-            //Destroy(bullet, 3f);
         }
-        
+
+      // if (Input.GetButtonDown("Fire1"))
+      // {
+      //     if (gunType == weaponType.pistol)
+      //         weapon.GetComponent<Weapon>().Shooting();
+      //     else if (gunType == weaponType.shotgun)
+      //         weapon.GetComponent<ShotgunWeapon>().Shooting();
+      //     else if (gunType == weaponType.assaultRifle)
+      //     {
+      //
+      //     }
+      //     else if (gunType == weaponType.DMR)
+      //     {
+      //
+      //     }
+      //     //GameObject bullet = Instantiate(bulletPrefab, gunLoc.transform.position, Quaternion.identity);
+      //     //bullet.GetComponent<Bullet>().type = shootType.player;
+      //     ShootingDetection();
+      //     //Rigidbody rb = bullet.GetComponent<Rigidbody>();
+      //     //rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
+      //     //Destroy(bullet, 3f);
+      //
+      // }
+
+    }
+
+    void changeGun()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("change the gun");
+            myBag.swapGun();
+            gunType = myBag.currnetWeapon;
+            weapon.checkWeapon();
+        }
     }
 
 
@@ -102,7 +123,7 @@ public class Player_Controller : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, shootingDetectionRadius);
-        
+
     }
 
     //locate possible enemy transforms from colliders found in sphere

@@ -10,6 +10,7 @@ public class CamLookAt : MonoBehaviour
     public float heightY, offsetZ;
 
     // Update is called once per frame
+
     void Update()
     {
         transform.position = new Vector3(target.transform.position.x, heightY, target.transform.position.z - offsetZ);
