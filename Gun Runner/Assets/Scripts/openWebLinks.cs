@@ -6,6 +6,6 @@ public class openWebLinks : MonoBehaviour
 {
     public void openLink ()
     {
-        Application.OpenURL("https://forms.gle/eTCrZhUpvhnYt3vp7");
+        Application.OpenURL("https://forms.gle/g3yeaueWbfiEmBze7");
     }
 }
