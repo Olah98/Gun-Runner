@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_Controller : MonoBehaviour
 {
     //this is the main camera that fouces onto the player
     Camera playerCam;
 
+
     [Header("Player Vars")]
     //this is the playes move speed
     public float moveSpeed;
+    //The starting value for the players health and a tracker for the players current health
+    public int maxHealth;
+    public int currentHealth;
     //public GameObject gunLoc;//the location that the bullets are fired from
     public GameObject bulletPrefab;
 
@@ -23,6 +28,8 @@ public class Player_Controller : MonoBehaviour
 
     public PlayerInventory myBag;
 
+    public HealthBar healthBar;
+
     private void Awake()
     {
         playerCam = Camera.main;
@@ -30,6 +37,16 @@ public class Player_Controller : MonoBehaviour
         gunType = myBag.currnetWeapon;
         //gunLoc = this.transform.GetChild(0).gameObject;
     }
+
+    private void Start()
+    {
+        //Sets player health to the Max Health value
+        currentHealth = maxHealth;
+        //Sets Health UI text to the Max Health value
+        healthBar.SetMaxHealth(maxHealth);
+    }
+
+
     void Update()
     {
         lookAround();
@@ -37,6 +54,17 @@ public class Player_Controller : MonoBehaviour
         shootCurGun();
         changeGun();
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(20);
+        }
+
+        void TakeDamage(int damage)
+        {
+            currentHealth -= damage;
+
+            healthBar.SetHealth(currentHealth);
+        }
     }
 
     void lookAround()

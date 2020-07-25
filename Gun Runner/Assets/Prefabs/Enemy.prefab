@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6693113323892980863}
   - component: {fileID: 7639592138670312942}
   - component: {fileID: 4965316014334196321}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,26 +331,28 @@ MonoBehaviour:
   agent: {fileID: 3338982158843672530}
   trackingObj: {fileID: 2393606134296597611}
   checkRadius: 10
-  health: 100
-  _poi: {fileID: 0}
+  stopDistance: 0
   distanceToTarget: {x: 0, y: 0, z: 0}
   distance: 0
-  fireRange: 10
-  gun: {fileID: 570125955029386645}
-  gunDamage: 10
+  speed: 3.5
+  trackingSpeed: 4.5
+  rotationSpeed: 5
+  canPatrol: 0
   directionDurationMax: 2
   directionDurationMin: 0.5
   patrolDir: 0
-  canPatrol: 0
-  speed: 3.5
-  trackingSpeed: 4.5
+  _isDone: 0
+  pathToFollow: {fileID: 0}
+  health: 100
+  gunDamage: 10
+  fireRange: 10
   fireRate: 2
   projectile: {fileID: 9133957338609727064, guid: e2ff0ff1826cad044866d2ddbdd33b11,
     type: 3}
-  LineOfSightMade: 0
-  InRangeToFire: 0
-  rotationSpeed: 5
-  gunLoc: {fileID: 570125955029386645}
+  gunType: 0
+  gun: {fileID: 570125955029386645}
+  triggerTimeMin: 1
+  triggerTimeMax: 1.5
 --- !u!114 &7626720962639901429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OverrideArea: 1
+  m_OverrideArea: 0
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff

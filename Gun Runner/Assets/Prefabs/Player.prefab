@@ -111,12 +111,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  maxHealth: 100
+  currentHealth: 0
   bulletPrefab: {fileID: 9133957338609727064, guid: e2ff0ff1826cad044866d2ddbdd33b11,
     type: 3}
   weapon: {fileID: 1631331165}
   shootingDetectionRadius: 20
   gunType: 0
   myBag: {fileID: 0}
+  healthBar: {fileID: 5050899094834490687}
 --- !u!54 &8510327572338910938
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -345,3 +348,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 829919516368825491}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5050899094834490687 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5592365248760791468, guid: 38d5bfbfec7a3b84284ccdbc88ba69ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 829919516368825491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad46c7dbdb692e40b358e3dbc968a53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
