@@ -8,6 +8,10 @@ public class Player_Controller : MonoBehaviour
     //this is the main camera that fouces onto the player
     Camera playerCam;
 
+    [Header("Player UI")]
+    //THIS TEXT IS TEMPORARY AND NEEDS A NEW HOME. CANT STAY HERE FOREVER
+    public GameObject Canvas;
+    public Text cargoText;
 
     [Header("Player Vars")]
     //this is the playes move speed
@@ -16,8 +20,7 @@ public class Player_Controller : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
     public bool hasCargo = false;
-    //THIS TEXT IS TEMPORARY AND NEEDS A NEW HOME. CANT STAY HERE FOREVER
-    public Text cargoText;
+    public bool isPlayerAlive = true;
     //public GameObject gunLoc;//the location that the bullets are fired from
     public GameObject bulletPrefab;
 
@@ -48,31 +51,26 @@ public class Player_Controller : MonoBehaviour
         //Sets Health UI text to the Max Health value
         healthBar.SetMaxHealth(maxHealth);
         cargoText.text = "";
+        
     }
 
 
     void Update()
     {
-        lookAround();
-        moveAround();
-        shootCurGun();
-        changeGun();
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isPlayerAlive == true)
         {
-            TakeDamage(20);
+            lookAround();
+            moveAround();
+            shootCurGun();
+            changeGun();
         }
 
-        void TakeDamage(int damage)
-        {
-            currentHealth -= damage;
-
-            healthBar.SetHealth(currentHealth);
-        }
+       
     }
 
 
-    //This is to check if the player has picked up the Cargo or not
+    //This is to check if the player has picked up the Cargo or not.
+    //Also checks if a bullet has hit the player, if so it runs the TakeDamage function
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Cargo")
@@ -81,7 +79,31 @@ public class Player_Controller : MonoBehaviour
             Destroy(GameObject.FindWithTag("Cargo"));
             //HERE IS SOME OF THAT TEMPORARY TEXT THAT NEEDS A NEW HOME
             cargoText.text = ("Cargo Collected!");
-            print("Cargo Collected");
+            
+        }
+
+        if (other.gameObject.tag== "Bullet")
+        {
+            TakeDamage(20);
+        }
+    }
+
+    //This function takes in damage values for the player. It also updates the Health Bar UI 
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
+
+        //Will check if player is dead, if so the player is disabled and End Screen UI pops up
+        //Disables the players weapon, freezes the game, and activates the Game Over Screen
+        if (currentHealth <= 0)
+        {
+            isPlayerAlive = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            Time.timeScale = 0f;
+            Canvas.transform.GetChild(3).gameObject.SetActive(true);
         }
     }
 

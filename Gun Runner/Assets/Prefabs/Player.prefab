@@ -111,11 +111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13cb8d92d0ed017418d94f5d475ebdbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas: {fileID: 7878585900461257515}
+  cargoText: {fileID: 8841581623325416253}
   moveSpeed: 5
   maxHealth: 100
   currentHealth: 0
   hasCargo: 0
-  cargoText: {fileID: 8841581623325416253}
   bulletPrefab: {fileID: 9133957338609727064, guid: e2ff0ff1826cad044866d2ddbdd33b11,
     type: 3}
   weapon: {fileID: 1631331165}
@@ -343,6 +344,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CargoText
       objectReference: {fileID: 0}
+    - target: {fileID: 5952107287890747665, guid: 38d5bfbfec7a3b84284ccdbc88ba69ef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7409031914011959224, guid: 38d5bfbfec7a3b84284ccdbc88ba69ef,
         type: 3}
       propertyPath: m_Name
@@ -370,6 +376,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38d5bfbfec7a3b84284ccdbc88ba69ef, type: 3}
+--- !u!1 &7878585900461257515 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7409031914011959224, guid: 38d5bfbfec7a3b84284ccdbc88ba69ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 829919516368825491}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &164139072043894691 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 703499403404749616, guid: 38d5bfbfec7a3b84284ccdbc88ba69ef,
