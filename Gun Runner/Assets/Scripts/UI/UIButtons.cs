@@ -34,7 +34,7 @@ public class UIButtons : MonoBehaviour
 
     public void LoadLevel()
     {
-        SceneManager.LoadScene("Tutorial Level");
+        SceneManager.LoadScene("Level 1");
     }
 
     public void LoadTitleScreen()
