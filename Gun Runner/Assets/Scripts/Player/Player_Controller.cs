@@ -42,6 +42,9 @@ public class Player_Controller : MonoBehaviour
         myBag = FindObjectOfType<PlayerInventory>();
         gunType = myBag.currnetWeapon;
         //gunLoc = this.transform.GetChild(0).gameObject;
+        //This time scale is to resume the game after the Game Over Screen pops up. 
+        //The time scale gets set to 0 when the game over screen pops up
+        Time.timeScale = 1f;
     }
 
     private void Start()
@@ -51,6 +54,7 @@ public class Player_Controller : MonoBehaviour
         //Sets Health UI text to the Max Health value
         healthBar.SetMaxHealth(maxHealth);
         cargoText.text = "";
+        
         
     }
 
