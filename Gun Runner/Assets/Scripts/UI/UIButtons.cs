@@ -27,6 +27,11 @@ public class UIButtons : MonoBehaviour
         SceneManager.LoadScene("CreditsScene");
     }
 
+    public void OpenHowToPlay()
+    {
+        SceneManager.LoadScene("HowToPlay");
+    }
+
     public void LoadLevel()
     {
         SceneManager.LoadScene("Tutorial Level");

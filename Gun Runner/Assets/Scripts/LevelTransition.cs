@@ -7,6 +7,8 @@ public class LevelTransition : MonoBehaviour
 {
     public string nextLevel;
 
+    public Player_Controller playerReference;
+
     public void loadLevel ()
     {
         SceneManager.LoadScene(nextLevel);
@@ -14,9 +16,18 @@ public class LevelTransition : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //This is the check if the player has hit the exit trigger AND if they have the cargo. If both are true, the player can load the next level
         if (other.tag == "Player")
         {
-            loadLevel();
+            if (playerReference.hasCargo == true)
+            {
+                loadLevel();
+            }
+            
+            else
+            {
+                print("No Cargo for you");
+            }
         }
     }
 }

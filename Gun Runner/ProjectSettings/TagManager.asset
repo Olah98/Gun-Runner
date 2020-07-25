@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Weapon
   - Ignore
+  - Cargo
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Enemy
   - Pellet
   - Object
-  - 
+  - Cargo
   - 
   - 
   - 

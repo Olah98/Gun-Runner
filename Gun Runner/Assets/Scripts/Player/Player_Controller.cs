@@ -15,6 +15,9 @@ public class Player_Controller : MonoBehaviour
     //The starting value for the players health and a tracker for the players current health
     public int maxHealth;
     public int currentHealth;
+    public bool hasCargo = false;
+    //THIS TEXT IS TEMPORARY AND NEEDS A NEW HOME. CANT STAY HERE FOREVER
+    public Text cargoText;
     //public GameObject gunLoc;//the location that the bullets are fired from
     public GameObject bulletPrefab;
 
@@ -44,6 +47,7 @@ public class Player_Controller : MonoBehaviour
         currentHealth = maxHealth;
         //Sets Health UI text to the Max Health value
         healthBar.SetMaxHealth(maxHealth);
+        cargoText.text = "";
     }
 
 
@@ -64,6 +68,20 @@ public class Player_Controller : MonoBehaviour
             currentHealth -= damage;
 
             healthBar.SetHealth(currentHealth);
+        }
+    }
+
+
+    //This is to check if the player has picked up the Cargo or not
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Cargo")
+        {
+            hasCargo = true;
+            Destroy(GameObject.FindWithTag("Cargo"));
+            //HERE IS SOME OF THAT TEMPORARY TEXT THAT NEEDS A NEW HOME
+            cargoText.text = ("Cargo Collected!");
+            print("Cargo Collected");
         }
     }
 

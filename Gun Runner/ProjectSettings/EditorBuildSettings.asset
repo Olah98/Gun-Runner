@@ -12,14 +12,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu Scenes/HomeScreen.unity
     guid: 3ce081ba3a4219e41b9f2597150a736c
   - enabled: 1
-    path: Assets/Scenes/Tutorial Level/Tutorial Level.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Menu Scenes/HowToPlay.unity
+    guid: 42ce0dbea876fee4ca6296042dee9d71
   - enabled: 1
     path: Assets/Scenes/Menu Scenes/CreditsScene.unity
     guid: f891bb630a367734586aa74ef5f852f1
   - enabled: 1
-    path: Assets/Scenes/Prototype1_End.unity
+    path: Assets/Scenes/Menu Scenes/Prototype1_End.unity
     guid: c45aa2d10e7ac714daf2a0738306c866
+  - enabled: 1
+    path: Assets/Scenes/Tutorial Level/Tutorial Level.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Trevors Level/Level 1.unity
     guid: bf52fbb38e7292e429352069803c2317
