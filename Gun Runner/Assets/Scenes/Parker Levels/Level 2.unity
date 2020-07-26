@@ -4962,6 +4962,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun Case 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b189e2f8d667e74449f0b9af5fb16e3c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: -822318041236728960, guid: b189e2f8d667e74449f0b9af5fb16e3c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cargo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464038766123665565, guid: b189e2f8d667e74449f0b9af5fb16e3c,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464038766123665565, guid: b189e2f8d667e74449f0b9af5fb16e3c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b189e2f8d667e74449f0b9af5fb16e3c, type: 3}
 --- !u!4 &1053678240 stripped
