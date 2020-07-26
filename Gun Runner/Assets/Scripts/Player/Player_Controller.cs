@@ -12,6 +12,7 @@ public class Player_Controller : MonoBehaviour
     //THIS TEXT IS TEMPORARY AND NEEDS A NEW HOME. CANT STAY HERE FOREVER
     public GameObject Canvas;
     public Text cargoText;
+    public Text ammoInMag;
 
     [Header("Player Vars")]
     //this is the playes move speed
@@ -54,7 +55,7 @@ public class Player_Controller : MonoBehaviour
         //Sets Health UI text to the Max Health value
         healthBar.SetMaxHealth(maxHealth);
         cargoText.text = "";
-        
+        ammoInMag.text = "Mag: " + weapon.ammoInMag.ToString();
         
     }
 
@@ -68,8 +69,8 @@ public class Player_Controller : MonoBehaviour
             shootCurGun();
             changeGun();
         }
+        ammoInMag.text = weapon.current.ToString() + ": " + weapon.ammoInMag.ToString();
 
-       
     }
 
 
@@ -150,6 +151,7 @@ public class Player_Controller : MonoBehaviour
             */
             weapon.Shooting();
             ShootingDetection();
+
         }
 
       // if (Input.GetButtonDown("Fire1"))
