@@ -105,7 +105,6 @@ public class PlayerWeapom : Weapon
                     for (int a = 0; a < pelletNum; a++)
                     {
                         pellets.Add(Quaternion.Euler(Vector3.zero));
-
                     }
 
                     //fire shot
