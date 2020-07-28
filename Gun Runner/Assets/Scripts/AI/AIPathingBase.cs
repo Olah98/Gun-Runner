@@ -262,10 +262,7 @@ public class AIPathingBase : MonoBehaviour
                             FireBullet();
                     }
                 }
-
-
             }
-
         }
 
         if(_firing)
@@ -278,7 +275,6 @@ public class AIPathingBase : MonoBehaviour
             //enemy is dead
             OnDeath();
         }
-
     }
 
     //when it dies
@@ -310,31 +306,16 @@ public class AIPathingBase : MonoBehaviour
     //rooty shooty mc tooty
     void FireBullet()
     {
-        //Weapon w = new Weapon();
-        //Weapon w = this.GetComponent<Weapon>();
         //new system
-        if (gunType == weaponType.pistol)
-            gun.GetComponent<PistolWeapon>().Shooting();
+        if (gunType == weaponType.pistol || gunType == weaponType.assaultRifle || gunType == weaponType.DMR)
+            gun.GetComponent<Weapon>().Shooting();
         else if (gunType == weaponType.shotgun)
             gun.GetComponent<ShotgunWeapon>().Shooting();
-        else if (gunType == weaponType.assaultRifle)
-        {
-            gun.GetComponent<AssaultRifle>().Shooting();
-        }
-        else if(gunType == weaponType.DMR)
-        {
-            gun.GetComponent<DMRWeapon>().Shooting();
-        }
-
 
         //old system
         //fire projectile forward (at player or poi)
         //GameObject bullet = Instantiate(projectile, gunLoc.transform.position, gunLoc.transform.rotation);
         //set any variables HERE
-        //bullet.GetComponent<Bullet>().type = shootType.enemy;
-        //bullet.GetComponent<Bullet>().damage = gunDamage;
-        //Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        //rb.AddForce(gunLoc.transform.forward * 10, ForceMode.Impulse);
         counter = 0.0f;
         //slight variation in firing
         fireRate = Random.Range(1f, _fireRateSet + (_fireRateSet * 0.1f));//_fireRateSet - (_fireRateSet * 0.1f), _fireRateSet + (_fireRateSet * 0.1f));

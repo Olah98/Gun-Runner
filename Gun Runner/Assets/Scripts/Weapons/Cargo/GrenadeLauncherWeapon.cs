@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrenadeLauncherWeapon : MonoBehaviour
+public class GrenadeLauncherWeapon : Weapon
 {
     // Start is called before the first frame update
     void Start()
