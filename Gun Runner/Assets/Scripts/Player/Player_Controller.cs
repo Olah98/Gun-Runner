@@ -87,8 +87,9 @@ public class Player_Controller : MonoBehaviour
             
         }
 
-        if (other.gameObject.tag== "Bullet" && other.gameObject.GetComponent<Bullet>().type == shootType.enemy)
+        if (other.gameObject.tag == "Bullet" && other.gameObject.GetComponent<Bullet>().type == shootType.enemy)
         {
+            //Debug.Log(other.name);
             TakeDamage(other.GetComponent<Bullet>().damage);
         }
     }

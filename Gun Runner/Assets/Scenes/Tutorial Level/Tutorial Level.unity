@@ -314,7 +314,7 @@ PrefabInstance:
     - target: {fileID: 1631331165, guid: 3a88b09fcdbecf849a95dc025728e335, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 9133957338609727064, guid: e2ff0ff1826cad044866d2ddbdd33b11,
+      objectReference: {fileID: 4010812081358206855, guid: 9ea25b4f9fc7b0341a96145b974eaf7e,
         type: 3}
     - target: {fileID: 1631331165, guid: 3a88b09fcdbecf849a95dc025728e335, type: 3}
       propertyPath: bulletVelocity
@@ -445,6 +445,12 @@ PrefabInstance:
       propertyPath: gunType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8510327572338910941, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 4010812081358206855, guid: 9ea25b4f9fc7b0341a96145b974eaf7e,
+        type: 3}
     - target: {fileID: 8887474382362257082, guid: 3a88b09fcdbecf849a95dc025728e335,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -1713,6 +1719,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6340117676681845996, guid: 7c73cc64beeb74c4889aa5ca1038a579,
+        type: 3}
+      propertyPath: slot1
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6340117676681845997, guid: 7c73cc64beeb74c4889aa5ca1038a579,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1895,7 +1906,7 @@ PrefabInstance:
     - target: {fileID: 3338982158843672526, guid: 4fcb4eafa622921479898614a630e081,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.7599998
+      value: -2.88
       objectReference: {fileID: 0}
     - target: {fileID: 3338982158843672526, guid: 4fcb4eafa622921479898614a630e081,
         type: 3}
@@ -3381,7 +3392,22 @@ PrefabInstance:
     - target: {fileID: 4010812081358206855, guid: 9ea25b4f9fc7b0341a96145b974eaf7e,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: GrenadeLauncherAmmo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290341532490770279, guid: 9ea25b4f9fc7b0341a96145b974eaf7e,
+        type: 3}
+      propertyPath: timer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290341532490770279, guid: 9ea25b4f9fc7b0341a96145b974eaf7e,
+        type: 3}
+      propertyPath: counterVal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290341532490770279, guid: 9ea25b4f9fc7b0341a96145b974eaf7e,
+        type: 3}
+      propertyPath: counterDecrement
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ea25b4f9fc7b0341a96145b974eaf7e, type: 3}

@@ -12,13 +12,17 @@ public class GrenadeLauncherAmmo : MonoBehaviour
 
     public GameObject hitEffect;
     public float explosionRadius = 5;
-    public float timer = 4;
+    public float timer = 10;
     public int damage = 5;
 
+    //percentage of decrement ( multiply by 10%)
+    float counterVal = 1; 
+    float  counterDecrement;
     Transform[] _proxEnemies;
-    public float counter;
+    float counterS;
     bool colorTick = true;
-   
+
+    float tick = 1;
 
     public Material defaultC;
 
@@ -26,29 +30,40 @@ public class GrenadeLauncherAmmo : MonoBehaviour
 
     private void Start()
     {
-        counter = 0;
+        counterDecrement = (counterVal/timer);
+       // Debug.Log(timer * (counterVal/timer));
+        counterS = 0;
         //starts countdown
         StartCoroutine(CountDown());
     }
 
     private void Update()
     {
-        counter += Time.deltaTime;
-        if (counter >= 2)
+        if (tick > -20)
         {
-            if(colorTick)
+            if (counterS >= tick)
             {
-                this.gameObject.GetComponent<Renderer>().material.color = Color.red;
-                colorTick = false;
-            }
-            else
-            {
-                this.gameObject.GetComponent<Renderer>().material.color = defaultC.color;
-                colorTick = true;
-            }
+                if (colorTick)
+                {
+                    this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                    colorTick = false;
+                }
+                else
+                {
+                    this.gameObject.GetComponent<Renderer>().material.color = defaultC.color;
+                    colorTick = true;
+                }
 
-            counter = 0;
+                //counterP += counterVal;
+                tick -= counterDecrement;
+                counterDecrement = tick*(counterVal / timer);
+                counterS = 0;
+            }
+            counterS += Time.deltaTime;
         }
+        else
+            this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+        
     }
 
     IEnumerator CountDown()
@@ -64,6 +79,14 @@ public class GrenadeLauncherAmmo : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player" || other.tag == "GrenadeLauncherAmmo")
+        {
+            Physics.IgnoreCollision(other.GetComponent<Collider>(), this.GetComponent<Collider>());
+        }
     }
 
     void Detonation()

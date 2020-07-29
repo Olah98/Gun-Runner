@@ -114,12 +114,14 @@ public class PlayerWeapom : Weapon
                         StartCoroutine(Reloading());
                     }
                 }
-        
-        break;
+                break;
             case weaponType.assaultRifle:
                 base.Shooting();
                 break;
             case weaponType.DMR:
+                base.Shooting();
+                break;
+            case weaponType.GrenadeLauncher:
                 base.Shooting();
                 break;
             default:

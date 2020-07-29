@@ -495,7 +495,7 @@ public class AIPathingBase : MonoBehaviour
             {
                 _currentIndexPatrol++;
 
-                Debug.Log(pathToFollow.pathPoints.Count);
+                //Debug.Log(pathToFollow.pathPoints.Count);
                 if (_currentIndexPatrol == pathToFollow.pathPoints.Count - 1)
                     _currentIndexPatrol = 0;
             }

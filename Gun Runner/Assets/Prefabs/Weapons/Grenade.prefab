@@ -11,13 +11,12 @@ GameObject:
   - component: {fileID: 2807036993458363194}
   - component: {fileID: 7838756710639381615}
   - component: {fileID: 228503479209247212}
-  - component: {fileID: 6334369696009343392}
   - component: {fileID: 7909441309718455416}
   - component: {fileID: 2577006064965138238}
   - component: {fileID: 5290341532490770279}
   m_Layer: 2
   m_Name: Grenade
-  m_TagString: Bullet
+  m_TagString: GrenadeLauncherAmmo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4010812081358206855}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.130914, y: 2.09, z: -4.31}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.30157214, y: 0.30157214, z: 0.30157214}
   m_Children:
   - {fileID: 7656966834897630979}
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6334369696009343392
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4010812081358206855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.42
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &7909441309718455416
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -105,7 +91,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4010812081358206855}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -139,10 +125,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 0}
-  explosionRadius: 5
+  explosionRadius: 2.5
   timer: 4
-  damage: 5
-  counter: 0
+  damage: 50
   defaultC: {fileID: 2100000, guid: dcb6db4e5c8f51042ac02be1692ec1d2, type: 2}
   type: 0
 --- !u!1 &6700103609623631725
@@ -160,7 +145,7 @@ GameObject:
   - component: {fileID: 6806322939745873332}
   m_Layer: 2
   m_Name: Grenade
-  m_TagString: Bullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,7 +179,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6700103609623631725}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -234,7 +219,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6700103609623631725}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -250,8 +235,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
+  m_Constraints: 126
+  m_CollisionDetection: 3

@@ -25,6 +25,7 @@ public enum weaponType
     shotgun,
     assaultRifle,
     DMR,
+    GrenadeLauncher,
     none
 }
 
@@ -57,15 +58,17 @@ public class Weapon : MonoBehaviour
     public virtual void Shooting()
     {
         //shoots
-        if(!_currentlyReloading && !_fireCoolDown)
+        if (!_currentlyReloading && !_fireCoolDown)
         {
             Debug.Log("PEW");
             ammoInMag--;
             GameObject bullet = Instantiate(projectile, this.transform.position, this.transform.rotation);
+            //Physics.IgnoreCollision(bullet.GetComponent<Collider>(), this.GetComponent<Collider>());
             //set variables to bullet
-            //if(type != )
-            bullet.GetComponent<Bullet>().type = type;
-            bullet.GetComponent<Bullet>().damage = damage;
+            if (projectile.gameObject.tag == "Bullet") { 
+                bullet.GetComponent<Bullet>().type = type;
+                bullet.GetComponent<Bullet>().damage = damage;
+             }
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(this.transform.forward * bulletVelocity);
             StartCoroutine(FireCoolDown());
