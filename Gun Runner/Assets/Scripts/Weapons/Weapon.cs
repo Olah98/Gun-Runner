@@ -24,7 +24,9 @@ public enum weaponType
     pistol,
     shotgun,
     assaultRifle,
-    DMR
+    DMR,
+    GrenadeLauncher,
+    none
 }
 
 public class Weapon : MonoBehaviour
@@ -44,8 +46,10 @@ public class Weapon : MonoBehaviour
     public int magSize;
     public int ammoInMag;
     [Header("Fire Rate")]
-    public float fireRate;
-    
+    public float fireRate; 
+    [Header("Bullet Speed")]
+    public float bulletVelocity; //default 500
+
     [Header("Who shooting this bitch?")]
     public shootType type;
     
@@ -54,16 +58,19 @@ public class Weapon : MonoBehaviour
     public virtual void Shooting()
     {
         //shoots
-        if(!_currentlyReloading && !_fireCoolDown)
+        if (!_currentlyReloading && !_fireCoolDown)
         {
             Debug.Log("PEW");
             ammoInMag--;
             GameObject bullet = Instantiate(projectile, this.transform.position, this.transform.rotation);
+            //Physics.IgnoreCollision(bullet.GetComponent<Collider>(), this.GetComponent<Collider>());
             //set variables to bullet
-            bullet.GetComponent<Bullet>().type = type;
-            bullet.GetComponent<Bullet>().damage = damage;
+            if (projectile.gameObject.tag == "Bullet") { 
+                bullet.GetComponent<Bullet>().type = type;
+                bullet.GetComponent<Bullet>().damage = damage;
+             }
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.AddForce(this.transform.forward * 10, ForceMode.Impulse);
+            rb.AddForce(this.transform.forward * bulletVelocity);
             StartCoroutine(FireCoolDown());
             if (ammoInMag <= 0)
             {

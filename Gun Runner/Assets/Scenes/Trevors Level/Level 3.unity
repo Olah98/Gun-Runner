@@ -24231,7 +24231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bfe2631c9d66224396cab4619e8eafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: Prototype1_End
+  nextLevel: Level 4
   playerReference: {fileID: 583210985}
 --- !u!1 &1958285182
 GameObject:

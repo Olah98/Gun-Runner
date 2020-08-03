@@ -127,7 +127,7 @@ MonoBehaviour:
   Canvas: {fileID: 7878585900461257515}
   cargoText: {fileID: 8841581623325416253}
   ammoInMag: {fileID: 6230503575096685460}
-  moveSpeed: 5
+  moveSpeed: 6
   maxHealth: 100
   currentHealth: 0
   hasCargo: 0

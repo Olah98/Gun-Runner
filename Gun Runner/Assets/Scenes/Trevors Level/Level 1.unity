@@ -49833,7 +49833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bfe2631c9d66224396cab4619e8eafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: Level 3
+  nextLevel: Level 2
   playerReference: {fileID: 508943255}
 --- !u!1 &1961592786 stripped
 GameObject:

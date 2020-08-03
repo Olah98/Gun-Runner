@@ -6,9 +6,6 @@ public class PlayerWeapom : Weapon
 {
     public weaponType current;
 
-    [Header("Bullet Speed")]
-    public float bulletVelocity;
-
     [Header("Shotgun Pellet Count")]
     public int pelletCountMax;
     public int pelletCountMin;
@@ -19,7 +16,8 @@ public class PlayerWeapom : Weapon
     List<Quaternion> pellets;
     [Header("Where bullets come out")]
     public GameObject barrelExit;
-    
+
+    public WeaponInstance[] weaponInventory = new WeaponInstance[3];
 
 
     private void Start()
@@ -33,10 +31,11 @@ public class PlayerWeapom : Weapon
         current = FindObjectOfType<PlayerInventory>().currnetWeapon;
         switch (current)
         {
+            //each value is set in scriptable object
             case weaponType.pistol:
                 damage = 10;
-                reloadSpeed = 2;
-                totalAmmo = 60;
+                reloadSpeed = 2; 
+                totalAmmo = 60; 
                 magSize = 6;
                 ammoInMag = 6;
                 fireRate = 1;
@@ -73,28 +72,14 @@ public class PlayerWeapom : Weapon
                 break;
         }
 
-    }
+    } 
 
     public override void Shooting()
     {
         switch (current)
         {
             case weaponType.pistol:
-                if (!_currentlyReloading && !_fireCoolDown)
-                {
-                    Debug.Log("PEW");
-                    ammoInMag--;
-                    GameObject bullet = Instantiate(projectile, this.transform.position, this.transform.rotation);
-                    //set variables to bullet
-                    bullet.GetComponent<Bullet>().type = type;
-                    bullet.GetComponent<Bullet>().damage = damage;
-                    bullet.GetComponent<Rigidbody>().AddForce(this.transform.forward * bulletVelocity);
-                    StartCoroutine(FireCoolDown());
-                    if (ammoInMag <= 0)
-                    {
-                        StartCoroutine(Reloading());
-                    }
-                }
+                base.Shooting();
                 break;
             case weaponType.shotgun:
                 if (!_currentlyReloading && !_fireCoolDown)
@@ -105,7 +90,6 @@ public class PlayerWeapom : Weapon
                     for (int a = 0; a < pelletNum; a++)
                     {
                         pellets.Add(Quaternion.Euler(Vector3.zero));
-
                     }
 
                     //fire shot
@@ -113,7 +97,6 @@ public class PlayerWeapom : Weapon
                     ammoInMag--;
                     //int i = 0;
                     for (int c = 0; c < pellets.Count; c++)
-                    //foreach(Quaternion quat in pellets)
                     {
                         pellets[c] = Random.rotation;
                         GameObject bullet = Instantiate(projectile, barrelExit.transform.position, barrelExit.transform.rotation);
@@ -131,41 +114,15 @@ public class PlayerWeapom : Weapon
                         StartCoroutine(Reloading());
                     }
                 }
-        
-        break;
+                break;
             case weaponType.assaultRifle:
-                if (!_currentlyReloading && !_fireCoolDown)
-                {
-                    Debug.Log("PEW");
-                    ammoInMag--;
-                    GameObject bullet = Instantiate(projectile, this.transform.position, this.transform.rotation);
-                    //set variables to bullet
-                    bullet.GetComponent<Bullet>().type = type;
-                    bullet.GetComponent<Bullet>().damage = damage;
-                    bullet.GetComponent<Rigidbody>().AddForce(this.transform.forward * bulletVelocity);
-                    StartCoroutine(FireCoolDown());
-                    if (ammoInMag <= 0)
-                    {
-                        StartCoroutine(Reloading());
-                    }
-                }
+                base.Shooting();
                 break;
             case weaponType.DMR:
-                if (!_currentlyReloading && !_fireCoolDown)
-                {
-                    Debug.Log("PEW");
-                    ammoInMag--;
-                    GameObject bullet = Instantiate(projectile, this.transform.position, this.transform.rotation);
-                    //set variables to bullet
-                    bullet.GetComponent<Bullet>().type = type;
-                    bullet.GetComponent<Bullet>().damage = damage;
-                    bullet.GetComponent<Rigidbody>().AddForce(this.transform.forward * bulletVelocity);
-                    StartCoroutine(FireCoolDown());
-                    if (ammoInMag <= 0)
-                    {
-                        StartCoroutine(Reloading());
-                    }
-                }
+                base.Shooting();
+                break;
+            case weaponType.GrenadeLauncher:
+                base.Shooting();
                 break;
             default:
                 break;

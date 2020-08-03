@@ -1687,6 +1687,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1235597463}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &143514211 stripped
@@ -3904,6 +3909,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1067605766}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &338105817 stripped
@@ -4108,7 +4118,7 @@ Transform:
   m_GameObject: {fileID: 341281275}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.01, y: 1.5, z: 67.95}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 5.3024, y: 2, z: 3.2792}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -4180,11 +4190,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 383158782}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &364575614 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3338982158843672526, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 364575613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &373662701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 731734722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &383158782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
     type: 3}
   m_PrefabInstance: {fileID: 364575613}
   m_PrefabAsset: {fileID: 0}
@@ -4449,6 +4476,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1003436474}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &428426144 stripped
@@ -4554,6 +4586,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &433932743 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 913177662}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &447205152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4761,6 +4799,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &462943320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 970429898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &464264645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5022,6 +5066,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1886120185}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &483481250 stripped
@@ -6574,6 +6623,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun Case 1
       objectReference: {fileID: 0}
+    - target: {fileID: -822318041236728960, guid: b189e2f8d667e74449f0b9af5fb16e3c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cargo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464038766123665565, guid: b189e2f8d667e74449f0b9af5fb16e3c,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464038766123665565, guid: b189e2f8d667e74449f0b9af5fb16e3c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b189e2f8d667e74449f0b9af5fb16e3c, type: 3}
 --- !u!1 &605001320 stripped
@@ -7860,6 +7924,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1749605953}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &721443293 stripped
@@ -7935,6 +8004,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 373662701}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &731734723 stripped
@@ -8612,6 +8686,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1642629453}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &808718983 stripped
@@ -8722,6 +8801,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &829091136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 1966355083}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &839649499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9524,6 +9609,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &906317470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 908090143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &908090143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9591,6 +9682,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 906317470}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &908090144 stripped
@@ -9666,6 +9762,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 433932743}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &913177663 stripped
@@ -10540,6 +10641,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 462943320}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &970429899 stripped
@@ -11024,6 +11130,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1003436474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 428426143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1004507728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11509,6 +11621,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &1067605766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 338105816}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1085905995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11708,6 +11826,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &1097133109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 1741080815}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1108857401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13245,6 +13369,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &1235597463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 143514210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1243853432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14098,6 +14228,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1962957547}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &1298917248 stripped
@@ -15449,6 +15584,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1560360592}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &1418796463 stripped
@@ -16575,6 +16715,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &1560360592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 1418796462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1564948846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16784,6 +16930,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &1578682755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 2103356540}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1597494106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17586,6 +17738,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &1642629453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 808718982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1646455990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18400,6 +18558,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &1707204290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 1726966338}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1712855211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18666,6 +18830,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1707204290}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &1726966339 stripped
@@ -18838,6 +19007,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1097133109}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &1741080816 stripped
@@ -18845,6 +19019,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3338982158843672526, guid: 4fcb4eafa622921479898614a630e081,
     type: 3}
   m_PrefabInstance: {fileID: 1741080815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1749605953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 721443292}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1751262037
 GameObject:
@@ -19567,6 +19747,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &1814790419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 1998060649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1818332370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20604,6 +20790,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &1886120185 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 483481249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1894326048
 GameObject:
   m_ObjectHideFlags: 0
@@ -21102,6 +21294,12 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: 00000000
+--- !u!1 &1962957547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8787167806646852481, guid: 4fcb4eafa622921479898614a630e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 1298917247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1966355083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21169,6 +21367,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 829091136}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &1966355084 stripped
@@ -21739,6 +21942,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1814790419}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &1998060650 stripped
@@ -22940,6 +23148,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 3338982158843672529, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1578682755}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &2103356541 stripped
