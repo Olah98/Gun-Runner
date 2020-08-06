@@ -26,6 +26,7 @@ public class WeaponInstance
     public int pelletCountMax;
     public int pelletCountMin;
     public float spreadAngle;
+    public GameObject ammo;
     //public float pelletVelocity;
 
 }

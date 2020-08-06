@@ -28,8 +28,11 @@ public class GrenadeLauncherAmmo : MonoBehaviour
 
     public shootType type;
 
+    public GameObject tempExplosionObj;
+
     private void Start()
     {
+        
         counterDecrement = (counterVal/timer);
        // Debug.Log(timer * (counterVal/timer));
         counterS = 0;
@@ -91,6 +94,7 @@ public class GrenadeLauncherAmmo : MonoBehaviour
 
     void Detonation()
     {
+        tempExplosionObj.GetComponent<MeshRenderer>().enabled = true;
         Debug.Log("BOOM");
         //will check radius around this object
         //if enemy enemies are in it, they die
@@ -99,12 +103,21 @@ public class GrenadeLauncherAmmo : MonoBehaviour
         {
             if (potentialTarget.gameObject.tag == "Enemy")
             {
+                Debug.Log(potentialTarget.gameObject.name);
                 potentialTarget.gameObject.GetComponent<AIPathingBase>().health -= damage;
             }
         }
 
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        StartCoroutine(showExplosion());
         //will maybe have particle effect too!
+    }
+
+    //explosion (TEMP)
+    IEnumerator showExplosion()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(this.gameObject);
     }
 
     //locate possible enemy transforms from colliders found in sphere
