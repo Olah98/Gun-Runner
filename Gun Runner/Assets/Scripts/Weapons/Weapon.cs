@@ -68,6 +68,7 @@ public class Weapon : MonoBehaviour
             if (projectile.gameObject.tag == "Bullet") { 
                 bullet.GetComponent<Bullet>().type = type;
                 bullet.GetComponent<Bullet>().damage = damage;
+                //bullet.GetComponent<Bullet>().bulletVelocity = bulletVelocity;
              }
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(this.transform.forward * bulletVelocity);

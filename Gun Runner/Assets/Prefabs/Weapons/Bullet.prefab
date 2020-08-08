@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8043297945650698981}
   - component: {fileID: 2712233683838463408}
   - component: {fileID: 5350521737914187827}
-  - component: {fileID: 2198638655423516799}
   - component: {fileID: 2641620044211381671}
   - component: {fileID: -1537894863938062623}
   - component: {fileID: 306549278440005119}
@@ -83,19 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &2198638655423516799
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9133957338609727064}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.42
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &2641620044211381671
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -139,4 +125,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 0}
   damage: 10
+  bulletVelocity: 500
   type: 0

@@ -13,8 +13,19 @@ public class Bullet : MonoBehaviour
 
     public GameObject hitEffect;
     public int damage = 5;
+    //public float bulletVelocity = 500;
     public shootType type;
 
+    private void Start()
+    {
+        
+        //this.GetComponent<Rigidbody>().AddForce(this.transform.forward * bulletVelocity);
+    }
+
+    private void Update()
+    {
+        
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,9 +54,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "GrenadeLauncherAmmo")
         {
-            //Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
         }
     }
 

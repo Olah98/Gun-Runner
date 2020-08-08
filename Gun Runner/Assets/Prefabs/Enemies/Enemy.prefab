@@ -100,7 +100,7 @@ MonoBehaviour:
   magSize: 5
   ammoInMag: 5
   fireRate: 1
-  bulletVelocity: 0
+  bulletVelocity: 500
   type: 1
 --- !u!1 &2393606134296597611
 GameObject:
@@ -352,7 +352,7 @@ MonoBehaviour:
   projectile: {fileID: 9133957338609727064, guid: e2ff0ff1826cad044866d2ddbdd33b11,
     type: 3}
   gunType: 0
-  gun: {fileID: 570125955029386645}
+  gun: {fileID: 8787167806646852481}
   triggerTimeMin: 1
   triggerTimeMax: 1.5
 --- !u!114 &7626720962639901429
@@ -440,6 +440,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5d5a2ff100e7b0408c3ed0df3f7da8d, type: 3}
+--- !u!1 &8787167806646852481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2538723783789683252, guid: c5d5a2ff100e7b0408c3ed0df3f7da8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6541778921572121013}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4947721134799749280 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2188968688191748373, guid: c5d5a2ff100e7b0408c3ed0df3f7da8d,

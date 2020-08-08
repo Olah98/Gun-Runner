@@ -879,6 +879,11 @@ PrefabInstance:
       propertyPath: canPatrol
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4965316014334196321, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: bulletVelocity
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &550184210 stripped
@@ -2712,6 +2717,11 @@ PrefabInstance:
       propertyPath: stopDistance
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4965316014334196321, guid: 4fcb4eafa622921479898614a630e081,
+        type: 3}
+      propertyPath: bulletVelocity
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcb4eafa622921479898614a630e081, type: 3}
 --- !u!4 &1870119005 stripped
@@ -3416,6 +3426,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: GrenadeLauncherAmmo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010812081358206855, guid: 9ea25b4f9fc7b0341a96145b974eaf7e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5290341532490770279, guid: 9ea25b4f9fc7b0341a96145b974eaf7e,
         type: 3}
