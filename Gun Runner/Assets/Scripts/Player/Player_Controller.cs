@@ -101,6 +101,15 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+    //ignore collisions to fix some physics problems
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "GrenadeLauncherAmmo")
+        {
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
+        }
+    }
+
     //This function takes in damage values for the player. It also updates the Health Bar UI 
     void TakeDamage(int damage)
     {
@@ -191,12 +200,12 @@ public class Player_Controller : MonoBehaviour
     }
 
     //WILL NEED TO BE UPDATED:
-    //temporary hardcoded gun values
+    //temporary hardcoded
     //future update will have players choose guns before level starts and they will be set here
     void SetPlayerGunData()
     {
         //can find using item number or by its name (must be exact)
-        myBag.SetGun1(weaponData.FindWeapon(1));
+        myBag.SetGun1(weaponData.FindWeapon("Grenade Launcher"));
         myBag.SetGun2(weaponData.FindWeapon(7));
         myBag.SetCargo(weaponData.FindWeapon("Grenade Launcher"));
     }
