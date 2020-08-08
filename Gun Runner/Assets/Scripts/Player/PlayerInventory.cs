@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
+
+    
+
     [Header("My Gun")]
     public WeaponInstance currnetWeapon;
     [Header("Guns I am holding")]
@@ -12,12 +15,11 @@ public class PlayerInventory : MonoBehaviour
     [Header("Cargo Weapon")]
     public WeaponInstance cargo;
 
+   
+
     public PlayerWeapom _playerWeapon;
 
-    private void Awake()
-    {
-        
-    }
+    
 
     private void Start()
     {
@@ -28,7 +30,7 @@ public class PlayerInventory : MonoBehaviour
     }
     public void swapGun()
     {
-        if(currnetWeapon == slot1)
+        if (currnetWeapon == slot1)
         {
             //updates ammo left in mag on slot1
             slot1.ammoInMag = _playerWeapon.ammoInMag;
