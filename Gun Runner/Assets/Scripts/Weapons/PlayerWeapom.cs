@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerWeapom : Weapon
 {
     public weaponType current;
+    private WeaponInstance _currentWeaponInstance;
 
     [Header("Shotgun Pellet Count")]
     public int pelletCountMax;
@@ -17,60 +18,71 @@ public class PlayerWeapom : Weapon
     [Header("Where bullets come out")]
     public GameObject barrelExit;
 
-    public WeaponInstance[] weaponInventory = new WeaponInstance[3];
+    //public WeaponInstance[] weaponInventory = new WeaponInstance[3];
 
 
     private void Start()
     {
-        current = FindObjectOfType<PlayerInventory>().currnetWeapon;
+        current = FindObjectOfType<PlayerInventory>().currnetWeapon.weapontype;
         checkWeapon();
     }
 
     public void checkWeapon()
     {
-        current = FindObjectOfType<PlayerInventory>().currnetWeapon;
-        switch (current)
-        {
+        _currentWeaponInstance = FindObjectOfType<PlayerInventory>().currnetWeapon;
+        current = _currentWeaponInstance.weapontype;
+        damage = _currentWeaponInstance.damage;
+        reloadSpeed = _currentWeaponInstance.reloadSpeed;
+        totalAmmo = _currentWeaponInstance.totalAmmo;
+        magSize = _currentWeaponInstance.magSize;
+
+        ammoInMag = _currentWeaponInstance.ammoInMag;
+        fireRate = _currentWeaponInstance.fireRate;
+        bulletVelocity = _currentWeaponInstance.bulletVelocity;
+        projectile = _currentWeaponInstance.ammo;
+
+       //// switch (current)
+      //  {
             //each value is set in scriptable object
-            case weaponType.pistol:
-                damage = 10;
-                reloadSpeed = 2; 
-                totalAmmo = 60; 
-                magSize = 6;
-                ammoInMag = 6;
-                fireRate = 1;
-                bulletVelocity = 500;
-                break;
-            case weaponType.shotgun:
-                damage = 5;
-                reloadSpeed = 5;
-                totalAmmo = 25;
-                magSize = 5;
-                ammoInMag = 5;
-                fireRate = 1;
-                bulletVelocity = 500;
-                break;
-            case weaponType.assaultRifle:
-                damage = 10;
-                reloadSpeed = 5;
-                totalAmmo = 35;
-                magSize = 20;
-                ammoInMag = 20;
-                fireRate = .1f;
-                bulletVelocity = 500;
-                break;
-            case weaponType.DMR:
-                damage = 10;
-                reloadSpeed = 6;
-                totalAmmo = 15;
-                magSize = 3;
-                ammoInMag = 3;
-                fireRate = 3;
-                bulletVelocity = 700;
-                break;
-            default:
-                break;
-        }
+          //  case weaponType.pistol:
+           //     damage = 10;
+           //     reloadSpeed = 2; 
+          //      totalAmmo = 60; 
+          //      magSize = 6;
+          //      ammoInMag = 6;
+          //      fireRate = 1;
+          //      bulletVelocity = 500;
+           //     break;
+         //  // case weaponType.shotgun:
+          //      damage = 5;
+           //     reloadSpeed = 5;
+           //     totalAmmo = 25;
+           //     magSize = 5;
+          //      ammoInMag = 5;
+          //      fireRate = 1;
+         //       bulletVelocity = 500;
+         //       break;
+         //   case weaponType.assaultRifle:
+         //       damage = 10;
+         //       reloadSpeed = 5;
+         //       totalAmmo = 35;
+         //       magSize = 20;
+         //       ammoInMag = 20;
+         //       fireRate = .1f;
+         //       bulletVelocity = 500;
+         //       break;
+         //   case weaponType.DMR:
+         //       damage = 10;
+        //        reloadSpeed = 6;
+         //       totalAmmo = 15;
+         //       magSize = 3;
+         //       ammoInMag = 3;
+         //       fireRate = 3;
+         //       bulletVelocity = 700;
+         //       break;
+         //   default:
+         //       break;
+        ////}
 
     } 
 
@@ -80,6 +92,7 @@ public class PlayerWeapom : Weapon
         {
             case weaponType.pistol:
                 base.Shooting();
+                
                 break;
             case weaponType.shotgun:
                 if (!_currentlyReloading && !_fireCoolDown)

@@ -20,6 +20,7 @@ public class WeaponInstance
     public int reloadSpeed;
     public int totalAmmo;
     public int magSize;
+    public int ammoInMag;
     public float fireRate;
     public float bulletVelocity;
     //shotgun stuff
@@ -35,11 +36,11 @@ public class WeaponInstance
 public class WeaponData : ScriptableObject
 {
     //public weaponInfo[] weaponData;
-    public WeaponInstance[] weaponData;
+    public WeaponInstance[] weaponDataStorage;
     //public int totalWeapons = weaponData.Length();
     public WeaponInstance FindWeapon(int weaponNum)
    {
-        foreach(WeaponInstance weapon in weaponData)
+        foreach(WeaponInstance weapon in weaponDataStorage)
         {
             if (weapon.weaponNumber == weaponNum)
                 return weapon;
@@ -49,7 +50,7 @@ public class WeaponData : ScriptableObject
 
     public WeaponInstance FindWeapon(string weaponName)
     {
-        foreach (WeaponInstance weapon in weaponData)
+        foreach (WeaponInstance weapon in weaponDataStorage)
         {
             if (weapon.weaponName == weaponName)
                 return weapon;

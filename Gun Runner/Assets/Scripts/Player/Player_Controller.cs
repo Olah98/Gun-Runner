@@ -23,7 +23,7 @@ public class Player_Controller : MonoBehaviour
     public bool hasCargo = false;
     public bool isPlayerAlive = true;
     //public GameObject gunLoc;//the location that the bullets are fired from
-    public GameObject bulletPrefab;
+    //public GameObject bulletPrefab;
 
     public PlayerWeapom weapon;
 
@@ -31,9 +31,13 @@ public class Player_Controller : MonoBehaviour
     public float shootingDetectionRadius = 20f;
     Transform[] _proxEnemies;
 
-    public weaponType gunType;
+    //public weaponType gunType;
 
     public PlayerInventory myBag;
+
+    //weapon data
+    [SerializeField]
+    public WeaponData weaponData;
 
     public HealthBar healthBar;
 
@@ -41,7 +45,10 @@ public class Player_Controller : MonoBehaviour
     {
         playerCam = Camera.main;
         myBag = FindObjectOfType<PlayerInventory>();
-        gunType = myBag.currnetWeapon;
+
+        SetPlayerGunData();
+
+        //gunType = myBag.currnetWeapon.weapontype;
         //gunLoc = this.transform.GetChild(0).gameObject;
         //This time scale is to resume the game after the Game Over Screen pops up. 
         //The time scale gets set to 0 when the game over screen pops up
@@ -144,7 +151,7 @@ public class Player_Controller : MonoBehaviour
         {
             Debug.Log("change the gun");
             myBag.swapGun();
-            gunType = myBag.currnetWeapon;
+            //gunType = myBag.currnetWeapon.weapontype;
             weapon.checkWeapon();
         }
     }
@@ -181,5 +188,16 @@ public class Player_Controller : MonoBehaviour
                 potentialTarget.gameObject.GetComponent<AIPathingBase>().setPOI(this.transform);
             }
         }
+    }
+
+    //WILL NEED TO BE UPDATED:
+    //temporary hardcoded gun values
+    //future update will have players choose guns before level starts and they will be set here
+    void SetPlayerGunData()
+    {
+        //can find using item number or by its name (must be exact)
+        myBag.SetGun1(weaponData.FindWeapon(1));
+        myBag.SetGun2(weaponData.FindWeapon(7));
+        myBag.SetCargo(weaponData.FindWeapon("Grenade Launcher"));
     }
 }

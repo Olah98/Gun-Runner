@@ -451,6 +451,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4010812081358206855, guid: 9ea25b4f9fc7b0341a96145b974eaf7e,
         type: 3}
+    - target: {fileID: 8510327572338910941, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: myBag
+      value: 
+      objectReference: {fileID: 1708629258}
+    - target: {fileID: 8510327572338910941, guid: 3a88b09fcdbecf849a95dc025728e335,
+        type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c62ca9e94e03194392649ec5e6e3882,
+        type: 2}
     - target: {fileID: 8887474382362257082, guid: 3a88b09fcdbecf849a95dc025728e335,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -2489,6 +2500,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1708629258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6340117676681845996, guid: 7c73cc64beeb74c4889aa5ca1038a579,
+    type: 3}
+  m_PrefabInstance: {fileID: 1088737594}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8765c71adf9efdd48972faa7dc31649c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1835666062 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2538723783789683252, guid: c5d5a2ff100e7b0408c3ed0df3f7da8d,
