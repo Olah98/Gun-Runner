@@ -132,12 +132,10 @@ MonoBehaviour:
   currentHealth: 0
   hasCargo: 0
   isPlayerAlive: 1
-  bulletPrefab: {fileID: 9133957338609727064, guid: e2ff0ff1826cad044866d2ddbdd33b11,
-    type: 3}
   weapon: {fileID: 1631331165}
   shootingDetectionRadius: 20
-  gunType: 0
   myBag: {fileID: 0}
+  weaponData: {fileID: 11400000, guid: 7c62ca9e94e03194392649ec5e6e3882, type: 2}
   healthBar: {fileID: 5050899094834490687}
 --- !u!54 &8510327572338910938
 Rigidbody:
