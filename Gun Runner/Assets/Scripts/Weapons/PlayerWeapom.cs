@@ -7,6 +7,8 @@ public class PlayerWeapom : Weapon
     public weaponType current;
     private WeaponInstance _currentWeaponInstance;
 
+    public PlayerInventory inv;
+
     [Header("Shotgun Pellet Count")]
     public int pelletCountMax;
     public int pelletCountMin;
@@ -18,13 +20,11 @@ public class PlayerWeapom : Weapon
     [Header("Where bullets come out")]
     public GameObject barrelExit;
 
-    //public WeaponInstance[] weaponInventory = new WeaponInstance[3];
-
-
     private void Start()
     {
-        current = FindObjectOfType<PlayerInventory>().currnetWeapon.weapontype;
+        
         checkWeapon();
+        //current = _currentWeaponInstance.weapontype;
     }
 
     public void checkWeapon()

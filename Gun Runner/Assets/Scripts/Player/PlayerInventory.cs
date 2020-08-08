@@ -12,16 +12,19 @@ public class PlayerInventory : MonoBehaviour
     [Header("Cargo Weapon")]
     public WeaponInstance cargo;
 
-    private PlayerWeapom _playerWeapon;
+    public PlayerWeapom _playerWeapon;
 
     private void Awake()
     {
-        _playerWeapon = FindObjectOfType<PlayerWeapom>();
+        
     }
 
     private void Start()
     {
         currnetWeapon = slot1;
+        _playerWeapon = FindObjectOfType<PlayerWeapom>();
+        //_playerWeapon.damage = 200;
+        _playerWeapon.checkWeapon();
     }
     public void swapGun()
     {
@@ -43,15 +46,18 @@ public class PlayerInventory : MonoBehaviour
     {
         slot1 = gunData;
         slot1.ammoInMag = slot1.magSize;
+        _playerWeapon.checkWeapon();
     }
     public void SetGun2(WeaponInstance gunData)
     {
         slot2 = gunData;
         slot2.ammoInMag = slot2.magSize;
+        _playerWeapon.checkWeapon();
     }
     public void SetCargo(WeaponInstance cargoData)
     {
         cargo = cargoData;
         cargo.ammoInMag = cargo.magSize;
+        _playerWeapon.checkWeapon();
     }
 }

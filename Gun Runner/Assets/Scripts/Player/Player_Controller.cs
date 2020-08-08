@@ -47,9 +47,7 @@ public class Player_Controller : MonoBehaviour
         myBag = FindObjectOfType<PlayerInventory>();
 
         SetPlayerGunData();
-
-        //gunType = myBag.currnetWeapon.weapontype;
-        //gunLoc = this.transform.GetChild(0).gameObject;
+       
         //This time scale is to resume the game after the Game Over Screen pops up. 
         //The time scale gets set to 0 when the game over screen pops up
         Time.timeScale = 1f;
@@ -63,9 +61,8 @@ public class Player_Controller : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         cargoText.text = "";
         ammoInMag.text = "Mag: " + weapon.ammoInMag.ToString();
-        
+        weapon.checkWeapon();
     }
-
 
     void Update()
     {
@@ -79,7 +76,6 @@ public class Player_Controller : MonoBehaviour
         ammoInMag.text = weapon.current.ToString() + ": " + weapon.ammoInMag.ToString();
 
     }
-
 
     //This is to check if the player has picked up the Cargo or not.
     //Also checks if a bullet has hit the player, if so it runs the TakeDamage function
@@ -208,5 +204,7 @@ public class Player_Controller : MonoBehaviour
         myBag.SetGun1(weaponData.FindWeapon(1));
         myBag.SetGun2(weaponData.FindWeapon(7));
         myBag.SetCargo(weaponData.FindWeapon("Grenade Launcher"));
+        weapon.checkWeapon();
     }
+
 }
