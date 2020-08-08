@@ -378,6 +378,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3688661131257274202}
     m_Modifications:
+    - target: {fileID: 131937045477679316, guid: c5d5a2ff100e7b0408c3ed0df3f7da8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2188968688191748373, guid: c5d5a2ff100e7b0408c3ed0df3f7da8d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -437,6 +442,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pistol
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538723783789683252, guid: c5d5a2ff100e7b0408c3ed0df3f7da8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5d5a2ff100e7b0408c3ed0df3f7da8d, type: 3}
