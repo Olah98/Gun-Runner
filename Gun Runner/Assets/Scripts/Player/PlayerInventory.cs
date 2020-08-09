@@ -19,10 +19,24 @@ public class PlayerInventory : MonoBehaviour
 
     public PlayerWeapom _playerWeapon;
 
+    public WeaponData gunObj;
     
 
     private void Start()
     {
+        if (FindObjectOfType<PlayerVars>().isActiveAndEnabled)
+        {
+            print("Found the Player's Bag");
+
+            if (PlayerVars.Instance.slot1.weapontype == weaponType.none)
+            {
+                PlayerVars.Instance.slot1 = gunObj.FindWeapon(1);
+                print("pistol set");
+            }
+            SetGun1(PlayerVars.Instance.slot1);
+            SetGun2(PlayerVars.Instance.slot2);
+
+        }
         currnetWeapon = slot1;
         _playerWeapon = FindObjectOfType<PlayerWeapom>();
         //_playerWeapon.damage = 200;

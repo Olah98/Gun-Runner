@@ -55,6 +55,14 @@ public class Player_Controller : MonoBehaviour
 
     private void Start()
     {
+        if (FindObjectOfType<PlayerVars>().isActiveAndEnabled)
+        {
+            print("Found the Player");
+            //Player_Controller playerInstance = FindObjectOfType<Player_Controller>();
+            if (PlayerVars.Instance.health == 0) { PlayerVars.Instance.health = maxHealth; }
+            currentHealth = PlayerVars.Instance.health;
+
+        }
         //Sets player health to the Max Health value
         currentHealth = maxHealth;
         //Sets Health UI text to the Max Health value
