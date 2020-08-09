@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Gun Runner/Assets/Prefabs/PlayerVars.prefab.meta
 guid: 6dd504fedd1dfdb4ba724d92bafffe1f
 PrefabImporter:
+=======
+guid: 91fdc3351d24a214198a5886c3d2ca78
+folderAsset: yes
+DefaultImporter:
+>>>>>>> 91134400a19f1904607741e41620abb781b4a9c7:Gun Runner/Assets/Mixamo.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
