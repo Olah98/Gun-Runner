@@ -109,8 +109,6 @@ public class AIPathingBase : MonoBehaviour
     private bool _attackCycle = false;
     //private bool 
     
-
-
     //patrol will follow path, once it reaches its last node it will either go to the first node or go backwards
     private void Awake()
     {
@@ -289,7 +287,8 @@ public class AIPathingBase : MonoBehaviour
     {
         if(collision.gameObject.tag == "Bullet" && collision.gameObject.GetComponent<Bullet>().type == shootType.player)
         {
-            //health -= collision.gameObject.GetComponent<Bullet>().damage;
+            //alerts enemy when it is hit by players bullet
+
         }
     }
 
@@ -298,6 +297,8 @@ public class AIPathingBase : MonoBehaviour
         if(other.tag == "Bullet" && other.GetComponent<Bullet>().type == shootType.player)
         {
             health -= other.GetComponent<Bullet>().damage;
+            //alerts enemy when it is hit by players bullet
+
         }
     }
 

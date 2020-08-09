@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//each weapons data stored
 [System.Serializable]
 public class WeaponInstance
 {

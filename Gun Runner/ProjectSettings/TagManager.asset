@@ -10,6 +10,7 @@ TagManager:
   - Ignore
   - Cargo
   - GrenadeLauncherAmmo
+  - Rocket
   layers:
   - Default
   - TransparentFX
