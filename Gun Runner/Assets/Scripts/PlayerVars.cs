@@ -9,12 +9,15 @@ public class PlayerVars : MonoBehaviour
 
     public static PlayerVars Instance { get { return _instance; } }// allows anythin in the scene to ref this script
 
-    public float health;
+    public int health = 0;
     public int credits;
 
+    [Header("Gun Data")]
+    public WeaponData gunObj;
+
     [Header("Guns moving forward")]
-    public WeaponData slot1;
-    public WeaponData slot2;
+    public WeaponInstance slot1 = new WeaponInstance();
+    public WeaponInstance slot2 = new WeaponInstance();
 
     private void Awake()
     {
@@ -28,8 +31,29 @@ public class PlayerVars : MonoBehaviour
     {
         if(FindObjectOfType<Player_Controller>().isActiveAndEnabled)
         {
-            print("I SEEEEEE YOUUUUUUUUUUUUUUUUUU");
+            print("Found the Player");
+            Player_Controller playerInstance = FindObjectOfType<Player_Controller>();
+            if (health == 0) { health = playerInstance.maxHealth; }
+            playerInstance.currentHealth = health;
+            
         }
+        
+        if (FindObjectOfType<PlayerInventory>().isActiveAndEnabled)
+        {
+            print("Found the Player's Bag");
+            PlayerInventory bagInstance = FindObjectOfType<PlayerInventory>();
+            
+
+            if (slot1.weapontype == weaponType.none)
+            {
+               slot1 = gunObj.FindWeapon(1);
+               print("pistol set");
+            }
+            bagInstance.SetGun1(slot1);
+            bagInstance.SetGun2(slot2);
+
+        }
+        
     }
 
 

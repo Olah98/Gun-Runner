@@ -62,4 +62,9 @@ public class PlayerInventory : MonoBehaviour
         cargo.ammoInMag = cargo.magSize;
        // _playerWeapon.checkWeapon();
     }
+    private void OnDestroy()
+    {
+        PlayerVars.Instance.slot1 = slot1;
+        PlayerVars.Instance.slot2 = slot2;
+    }
 }

@@ -201,10 +201,14 @@ public class Player_Controller : MonoBehaviour
     void SetPlayerGunData()
     {
         //can find using item number or by its name (must be exact)
-        myBag.SetGun1(weaponData.FindWeapon(1));
-        myBag.SetGun2(weaponData.FindWeapon(7));
+        //myBag.SetGun1(weaponData.FindWeapon(1));
+        //myBag.SetGun2(weaponData.FindWeapon(7));
         myBag.SetCargo(weaponData.FindWeapon("Grenade Launcher"));
         weapon.checkWeapon();
     }
 
+    private void OnDestroy()
+    {
+        PlayerVars.Instance.health = currentHealth;
+    }
 }
