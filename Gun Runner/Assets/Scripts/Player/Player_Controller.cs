@@ -64,9 +64,10 @@ public class Player_Controller : MonoBehaviour
 
         }
         //Sets player health to the Max Health value
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
         //Sets Health UI text to the Max Health value
         healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetHealth(currentHealth);
         cargoText.text = "";
         ammoInMag.text = "Mag: " + weapon.ammoInMag.ToString();
         weapon.checkWeapon();
