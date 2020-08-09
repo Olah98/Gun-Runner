@@ -7,7 +7,7 @@ public class PlayerWeapom : Weapon
     public weaponType current;
     private WeaponInstance _currentWeaponInstance;
 
-    public PlayerInventory inv;
+    //public PlayerInventory inv;
 
     [Header("Shotgun Pellet Count")]
     public int pelletCountMax;
@@ -22,7 +22,7 @@ public class PlayerWeapom : Weapon
 
     private void Start()
     {
-        
+        _parent = this.transform.parent.gameObject;
         checkWeapon();
         //current = _currentWeaponInstance.weapontype;
     }

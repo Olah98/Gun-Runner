@@ -223,3 +223,17 @@ MonoBehaviour:
     pelletCountMin: 0
     spreadAngle: 0
     ammo: {fileID: 4010812081358206855, guid: 9ea25b4f9fc7b0341a96145b974eaf7e, type: 3}
+  - weaponName: RPG
+    weaponNumber: 16
+    weapontype: 4
+    damage: 100
+    reloadSpeed: 5
+    totalAmmo: 7
+    magSize: 1
+    ammoInMag: 1
+    fireRate: 1
+    bulletVelocity: 500
+    pelletCountMax: 0
+    pelletCountMin: 0
+    spreadAngle: 0
+    ammo: {fileID: 389214978369612305, guid: 8aae47e5b807c654ead861bd96a8560b, type: 3}

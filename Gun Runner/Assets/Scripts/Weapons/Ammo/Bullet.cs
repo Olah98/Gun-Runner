@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     public int damage = 5;
     //public float bulletVelocity = 500;
     public shootType type;
+    public GameObject shooter;
 
     private void Start()
     {

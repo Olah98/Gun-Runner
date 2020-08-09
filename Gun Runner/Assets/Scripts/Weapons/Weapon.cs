@@ -52,7 +52,9 @@ public class Weapon : MonoBehaviour
 
     [Header("Who shooting this bitch?")]
     public shootType type;
-    
+
+    public GameObject _parent;
+
     //shotgun will inherit weapon
     //will have spread and number of pellets (range)
     public virtual void Shooting()
@@ -68,6 +70,7 @@ public class Weapon : MonoBehaviour
             if (projectile.gameObject.tag == "Bullet") { 
                 bullet.GetComponent<Bullet>().type = type;
                 bullet.GetComponent<Bullet>().damage = damage;
+                bullet.GetComponent<Bullet>().shooter = _parent;
                 //bullet.GetComponent<Bullet>().bulletVelocity = bulletVelocity;
              }
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
