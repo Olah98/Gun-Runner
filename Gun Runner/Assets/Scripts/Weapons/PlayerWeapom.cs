@@ -137,6 +137,12 @@ public class PlayerWeapom : Weapon
             case weaponType.GrenadeLauncher:
                 base.Shooting();
                 break;
+            case weaponType.RPG:
+                base.Shooting();
+                break;
+            case weaponType.MiniGun:
+                base.Shooting();
+                break;
             default:
                 break;
         }

@@ -26,6 +26,8 @@ public enum weaponType
     assaultRifle,
     DMR,
     GrenadeLauncher,
+    RPG,
+    MiniGun,
     none
 }
 

@@ -106,10 +106,11 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
-    //ignore collisions to fix some physics problems
+    
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "GrenadeLauncherAmmo")
+        //ignore collisions to fix some physics problems
+        if (collision.gameObject.tag == "GrenadeLauncherAmmo")
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
         }

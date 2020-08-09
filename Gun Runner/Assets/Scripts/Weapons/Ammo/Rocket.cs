@@ -57,8 +57,14 @@ public class Rocket : MonoBehaviour
 
     void Detonation()
     {
+        //will remove this when particle effect are in
         tempExplosionObj.GetComponent<MeshRenderer>().enabled = true;
         Debug.Log("BOOM");
+
+        ///
+        //PARTILE EFFECT GOES HERE
+        ///
+
         //will check radius around this object
         //if enemy enemies are in it, they die
         _proxEnemies = collidersToTransforms(Physics.OverlapSphere(transform.position, explosionRadius));
