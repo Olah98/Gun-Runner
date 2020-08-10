@@ -19,6 +19,7 @@ public class AIPathingBase : MonoBehaviour
     //when there is not a player to track, it will either move in a patrol manner OR randomly up, down, left or right?
 
     Transform[] _nearbyEnemies;
+    Transform[] _bulletsNear;
 
     [Header("Tracking and Pathfinding")]
     public NavMeshAgent agent;
@@ -28,9 +29,11 @@ public class AIPathingBase : MonoBehaviour
     //[Range(5, 20)]
     public float checkRadius = 10f; //10 seems to work well
     public float stopDistance;
+    [Header("Bullet Detection Radius")]
+    public float bulletDetectionRadius = 2f;
     [Header("Target")]
     private Transform _poi;
-    public Vector3 distanceToTarget;
+    private Vector3 distanceToTarget;
     [Header("Distance to target")]
     public float distance;
     [Header("How fast it moves")]
@@ -45,7 +48,6 @@ public class AIPathingBase : MonoBehaviour
     [Header("How fast enemy rotates")]
     public float rotationSpeed = 5.0f;
     [Space(20)]
-
 
     [Header("Set enemy to idle or patrol idle")]
     public bool canPatrol = true;
@@ -83,8 +85,6 @@ public class AIPathingBase : MonoBehaviour
     public int health = 100;
     
     [Space(15)]
-    [Header("Gun Varaibles")]
-    public int gunDamage = 10;
     [Header("Fire Range")]
     public float fireRange = 9f;
     [Header("How often it fires")]
@@ -107,15 +107,13 @@ public class AIPathingBase : MonoBehaviour
     private bool InRangeToFire = false;
 
     private bool _attackCycle = false;
-    //private bool 
+    private bool _nearMiss = false;
     
     //patrol will follow path, once it reaches its last node it will either go to the first node or go backwards
     private void Awake()
     {
         _lastPosition = transform.position;
-        //_isMoving = false;
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -123,7 +121,7 @@ public class AIPathingBase : MonoBehaviour
         _rangeStop = Random.Range(0.4f, 0.7f);
         _fireRateSet = fireRate;
         fireRate = Random.Range(0.5f, _fireRateSet + (_fireRateSet * 0.1f));
-        SetGun();
+        //SetGun();
         this.GetComponent<NavMeshAgent>().speed = speed;
         _speedMin = speed / 2;
         _speedMax = speed;
@@ -189,12 +187,6 @@ public class AIPathingBase : MonoBehaviour
         StartCoroutine(changeDirections());
     }
 
-    void SetGun()
-    {
-
-        //gun struct will have damage, speed, reload, firerate ect
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -219,14 +211,15 @@ public class AIPathingBase : MonoBehaviour
                 _attackCycle = false;
             }
             
-            if (distance <= stopDistance)//(checkRadius * _rangeStop))
+            if (distance <= stopDistance)
             {
                 this.GetComponent<NavMeshAgent>().speed = 0;
             }
             else
                 this.GetComponent<NavMeshAgent>().speed = speed;
 
-            if (CheckPOIDistance())
+            //movement and line of sight
+            if (CheckPOIDistance() || _nearMiss)
             {
                 _attackCycle = false;
                 agent.isStopped = false;
@@ -263,6 +256,9 @@ public class AIPathingBase : MonoBehaviour
             }
         }
 
+        //if someone shoots at enemy 
+        FiredAt();
+
         if(_firing)
         {
             FireBullet();
@@ -279,7 +275,6 @@ public class AIPathingBase : MonoBehaviour
     void OnDeath()
     {
         //do stuff here
-
         Destroy(this.gameObject);
     }
 
@@ -302,8 +297,6 @@ public class AIPathingBase : MonoBehaviour
         }
     }
 
-
-
     //rooty shooty mc tooty
     void FireBullet()
     {
@@ -315,18 +308,16 @@ public class AIPathingBase : MonoBehaviour
 
         //old system
         //fire projectile forward (at player or poi)
-        //GameObject bullet = Instantiate(projectile, gunLoc.transform.position, gunLoc.transform.rotation);
         //set any variables HERE
         counter = 0.0f;
         //slight variation in firing
-        fireRate = Random.Range(1f, _fireRateSet + (_fireRateSet * 0.1f));//_fireRateSet - (_fireRateSet * 0.1f), _fireRateSet + (_fireRateSet * 0.1f));
+        fireRate = Random.Range(1f, _fireRateSet + (_fireRateSet * 0.1f));
     }
 
     //UNUSED
     void DoMovement()
     {
         float distance = Vector3.Distance(path.corners[_currentIndex], transform.position);
-        //agent.transform.position = Vector3.MoveTowards(transform.position, path.corners[_currentIndex], Time.deltaTime * speed);
         agent.SetDestination(Vector3.MoveTowards(transform.position, path.corners[_currentIndex], Time.deltaTime * speed * 100));
 
         if(path.corners[_currentIndex] - transform.position != Vector3.zero)
@@ -352,10 +343,12 @@ public class AIPathingBase : MonoBehaviour
         distanceToTarget = this.transform.position - _poi.transform.position;
         distance = distanceToTarget.magnitude;
 
-        if(distanceToTarget.magnitude < fireRange)
+        if (distanceToTarget.magnitude < fireRange)
         {
             attackMode = true;
         }
+        else
+            //Debug.Log("not in fire range");
         InRangeToFire = attackMode;
         
         return attackMode;
@@ -368,14 +361,6 @@ public class AIPathingBase : MonoBehaviour
 
         Vector3 forward = transform.TransformDirection(Vector3.forward) * fireRange;
 
-        //Vector3 left = transform.TransformDirection(new Vector3(0, 0, 0.5f)) * fireRange;
-        //Vector3 right = transform.TransformDirection(new Vector3(0, 0, 1.5f)) * fireRange;
-
-
-
-        //have 3 raycasts total, one dead center, one slightly left and slightly right
-        //Vector3 left = new Vector3(trackingObj.transform.position.x + 0.2f, trackingObj.transform.position.y, trackingObj.transform.position.z);
-        //Vector3 right = new Vector3(trackingObj.transform.position.x - 0.2f, trackingObj.transform.position.y, trackingObj.transform.position.z);
         Vector3 eulerAngles = new Vector3(0, 4f, 0);
         Vector3 directionLeft = Quaternion.Euler(eulerAngles) * trackingObj.transform.forward;
         eulerAngles = new Vector3(0, -4f, 0);
@@ -385,7 +370,6 @@ public class AIPathingBase : MonoBehaviour
         Debug.DrawRay(trackingObj.transform.position, directionLeft * checkRadius, Color.red);
         Debug.DrawRay(trackingObj.transform.position, directionRight * checkRadius, Color.red);
         Debug.DrawRay(trackingObj.transform.position, trackingObj.transform.forward * checkRadius, Color.red);
-
 
         //if we hit something, check to see if its player
         if (Physics.Raycast(trackingObj.transform.position, trackingObj.transform.forward, out lineOfSight, Mathf.Infinity)|| Physics.Raycast(trackingObj.transform.position, directionLeft, out lineOfSight, Mathf.Infinity) || Physics.Raycast(trackingObj.transform.position, directionRight, out lineOfSight, Mathf.Infinity))
@@ -468,8 +452,10 @@ public class AIPathingBase : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, checkRadius);
-        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, bulletDetectionRadius);
     }
+  
 
     //simple math, get distance
     private float getDistanceSqr(Vector3 initialPoint, Vector3 targetPoint)
@@ -594,5 +580,35 @@ public class AIPathingBase : MonoBehaviour
         _firing = true;
         yield return new WaitForSeconds(Random.Range(triggerTimeMin, triggerTimeMax));
         _firing = false;
+    }
+
+    //if someone shoots at enemy, and bullets almost hit or do, enemy will know
+    public void FiredAt()
+    {
+        
+        _bulletsNear = collidersToTransforms(Physics.OverlapSphere(transform.position, bulletDetectionRadius));
+        foreach (Transform potentialTarget in _bulletsNear)
+        {
+            if (potentialTarget.gameObject.tag == "Bullet")
+            {
+                //Debug.Log("near miss");
+                //Debug.Log(potentialTarget.GetComponent<Bullet>().shooter.tag);
+                //if player shot bullet
+                if (potentialTarget.GetComponent<Bullet>().shooter.tag == "Player")
+                {
+                    //if enemy is way to far away, enemy wont still have target
+                    float dSqrToTarget = getDistanceSqr(transform.position, potentialTarget.position);
+                    if (dSqrToTarget < 30f)
+                    {
+                        //Debug.Log("target acquired");
+                        _poi = potentialTarget.GetComponent<Bullet>().shooter.transform;
+                        //if (_attackCycle != true)
+                        _attackCycle = true;
+                        //bypass range requirement to track poi. Enemy was attacts and will go that that location
+                        _nearMiss = true;
+                    }
+                }
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ public class HealthBar : MonoBehaviour
 
 
         healthText.text = "Health: " + health;
-        print("Im running");
+        //print("Im running");
     }
 
     public void SetMaxHealth (int health)

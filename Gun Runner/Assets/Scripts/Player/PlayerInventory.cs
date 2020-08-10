@@ -31,9 +31,10 @@ public class PlayerInventory : MonoBehaviour
             if (PlayerVars.Instance.slot1.weapontype == weaponType.none)
             {
                 //Debug.Log("Setting weapons");
-                PlayerVars.Instance.slot1 = gunObj.FindWeapon(16);
+                PlayerVars.Instance.slot1 = gunObj.FindWeapon(1);
+                PlayerVars.Instance.slot2 = gunObj.FindWeapon(9);
                 //temp for testing
-                PlayerVars.Instance.slot2 = gunObj.FindWeapon(17);
+                //PlayerVars.Instance.slot2 = gunObj.FindWeapon(17);
                 print("pistol set");
             }
             SetGun1(PlayerVars.Instance.slot1);

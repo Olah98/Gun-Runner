@@ -23,6 +23,7 @@ public class WeaponInstance
     public int magSize;
     public int ammoInMag;
     public float fireRate;
+    public float stability;
     public float bulletVelocity;
     //shotgun stuff
     public int pelletCountMax;

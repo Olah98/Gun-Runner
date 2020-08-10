@@ -35,7 +35,7 @@ public class PlayerWeapom : Weapon
         reloadSpeed = _currentWeaponInstance.reloadSpeed;
         totalAmmo = _currentWeaponInstance.totalAmmo;
         magSize = _currentWeaponInstance.magSize;
-
+        stability = _currentWeaponInstance.stability;
         ammoInMag = _currentWeaponInstance.ammoInMag;
         fireRate = _currentWeaponInstance.fireRate;
         bulletVelocity = _currentWeaponInstance.bulletVelocity;

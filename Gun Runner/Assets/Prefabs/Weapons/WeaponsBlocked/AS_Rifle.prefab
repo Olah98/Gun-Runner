@@ -120,16 +120,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2387651492461744020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 292f804cd2881d34694b6ed01ee6bc15, type: 3}
+  m_Script: {fileID: 11500000, guid: 90f7d0b22373d0044a654cd08974ceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 9133957338609727064, guid: e2ff0ff1826cad044866d2ddbdd33b11,
     type: 3}
   damage: 10
-  reloadSpeed: 5
-  totalAmmo: 35
+  reloadSpeed: 2
+  totalAmmo: 100
   magSize: 20
   ammoInMag: 20
-  fireRate: 0.1
-  type: 0
+  fireRate: 0.3
   bulletVelocity: 500
+  type: 1
+  _parent: {fileID: 0}

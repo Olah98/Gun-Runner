@@ -48,7 +48,9 @@ public class Weapon : MonoBehaviour
     public int magSize;
     public int ammoInMag;
     [Header("Fire Rate")]
-    public float fireRate; 
+    public float fireRate;
+    [Header("Stability")]
+    public float stability;
     [Header("Bullet Speed")]
     public float bulletVelocity; //default 500
 
@@ -57,6 +59,27 @@ public class Weapon : MonoBehaviour
 
     public GameObject _parent;
 
+
+    [Header("Must have the LaserSight prefab in the scene (Found in Particles Folder)")]
+    [Header("Laser sight")]
+    public bool sniper;
+    public LineRenderer laserSight;
+    public float laserSightRange;
+
+    private void Update()
+    {
+        //if its a sniper it has a laser sight
+        if(sniper)
+        {
+            //set line renderer start and endpoint
+            laserSight.SetPosition(0, this.transform.position);
+            //end point
+            Vector3 forward = transform.TransformDirection(Vector3.forward) * laserSightRange;
+            forward += this.transform.position;
+            laserSight.SetPosition(1, forward);
+        }
+    }
+
     //shotgun will inherit weapon
     //will have spread and number of pellets (range)
     public virtual void Shooting()
@@ -64,19 +87,25 @@ public class Weapon : MonoBehaviour
         //shoots
         if (!_currentlyReloading && !_fireCoolDown)
         {
-            Debug.Log("PEW");
+            //Debug.Log("PEW");
             ammoInMag--;
             GameObject bullet = Instantiate(projectile, this.transform.position, this.transform.rotation);
             //Physics.IgnoreCollision(bullet.GetComponent<Collider>(), this.GetComponent<Collider>());
             //set variables to bullet
-            if (projectile.gameObject.tag == "Bullet") { 
+            if (projectile.gameObject.tag == "Bullet") {
+
+                //stability spread
+                float xSpread = Random.Range(-1, 1);
+                float ySpread = Random.Range(-1, 1);
+                Vector3 spread = new Vector3(xSpread, ySpread, 0.0f).normalized * stability;
+
+                bullet.transform.rotation = Quaternion.Euler(spread) * bullet.transform.rotation;
                 bullet.GetComponent<Bullet>().type = type;
                 bullet.GetComponent<Bullet>().damage = damage;
                 bullet.GetComponent<Bullet>().shooter = _parent;
-                //bullet.GetComponent<Bullet>().bulletVelocity = bulletVelocity;
              }
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.AddForce(this.transform.forward * bulletVelocity);
+            rb.AddForce(bullet.transform.forward * bulletVelocity);
             StartCoroutine(FireCoolDown());
             if (ammoInMag <= 0)
             {
@@ -96,7 +125,7 @@ public class Weapon : MonoBehaviour
 
     public IEnumerator Reloading()
     {
-        Debug.Log("Reloading");
+        //Debug.Log("Reloading");
         _currentlyReloading = true;
         yield return new WaitForSeconds(reloadSpeed);
         if(totalAmmo != -1)

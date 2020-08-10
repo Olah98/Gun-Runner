@@ -46,7 +46,7 @@ public class Player_Controller : MonoBehaviour
         playerCam = Camera.main;
         myBag = FindObjectOfType<PlayerInventory>();
 
-        SetPlayerGunData();
+        //SetPlayerGunData();
        
         //This time scale is to resume the game after the Game Over Screen pops up. 
         //The time scale gets set to 0 when the game over screen pops up
@@ -213,7 +213,7 @@ public class Player_Controller : MonoBehaviour
         //can find using item number or by its name (must be exact)
         //myBag.SetGun1(weaponData.FindWeapon(1));
         //myBag.SetGun2(weaponData.FindWeapon(7));
-        myBag.SetCargo(weaponData.FindWeapon("Grenade Launcher"));
+        //myBag.SetCargo(weaponData.FindWeapon("Grenade Launcher"));
         weapon.checkWeapon();
     }
 

@@ -20,8 +20,9 @@ MonoBehaviour:
     reloadSpeed: 2
     totalAmmo: 60
     magSize: 6
-    ammoInMag: 6
+    ammoInMag: 4
     fireRate: 1
+    stability: 0
     bulletVelocity: 500
     pelletCountMax: 0
     pelletCountMin: 0
@@ -36,6 +37,7 @@ MonoBehaviour:
     magSize: 0
     ammoInMag: 0
     fireRate: 0
+    stability: 0
     bulletVelocity: 0
     pelletCountMax: 0
     pelletCountMin: 0
@@ -50,6 +52,7 @@ MonoBehaviour:
     magSize: 0
     ammoInMag: 0
     fireRate: 0
+    stability: 0
     bulletVelocity: 0
     pelletCountMax: 0
     pelletCountMin: 0
@@ -64,6 +67,7 @@ MonoBehaviour:
     magSize: 4
     ammoInMag: 4
     fireRate: 1
+    stability: 0
     bulletVelocity: 500
     pelletCountMax: 10
     pelletCountMin: 7
@@ -78,6 +82,7 @@ MonoBehaviour:
     magSize: 5
     ammoInMag: 5
     fireRate: 1
+    stability: 0
     bulletVelocity: 500
     pelletCountMax: 10
     pelletCountMin: 7
@@ -92,6 +97,7 @@ MonoBehaviour:
     magSize: 0
     ammoInMag: 0
     fireRate: 0
+    stability: 0
     bulletVelocity: 0
     pelletCountMax: 0
     pelletCountMin: 0
@@ -106,6 +112,7 @@ MonoBehaviour:
     magSize: 15
     ammoInMag: 15
     fireRate: 0.3
+    stability: 0
     bulletVelocity: 500
     pelletCountMax: 0
     pelletCountMin: 0
@@ -120,6 +127,7 @@ MonoBehaviour:
     magSize: 0
     ammoInMag: 0
     fireRate: 0
+    stability: 0
     bulletVelocity: 0
     pelletCountMax: 0
     pelletCountMin: 0
@@ -129,11 +137,12 @@ MonoBehaviour:
     weaponNumber: 9
     weapontype: 2
     damage: 10
-    reloadSpeed: 5
+    reloadSpeed: 4
     totalAmmo: 35
     magSize: 20
     ammoInMag: 20
     fireRate: 0.3
+    stability: 3
     bulletVelocity: 500
     pelletCountMax: 0
     pelletCountMin: 0
@@ -148,6 +157,7 @@ MonoBehaviour:
     magSize: 0
     ammoInMag: 0
     fireRate: 0
+    stability: 0
     bulletVelocity: 0
     pelletCountMax: 0
     pelletCountMin: 0
@@ -162,6 +172,7 @@ MonoBehaviour:
     magSize: 25
     ammoInMag: 25
     fireRate: 0.1
+    stability: 0
     bulletVelocity: 500
     pelletCountMax: 0
     pelletCountMin: 0
@@ -176,6 +187,7 @@ MonoBehaviour:
     magSize: 0
     ammoInMag: 0
     fireRate: 0
+    stability: 0
     bulletVelocity: 0
     pelletCountMax: 0
     pelletCountMin: 0
@@ -190,6 +202,7 @@ MonoBehaviour:
     magSize: 0
     ammoInMag: 0
     fireRate: 0
+    stability: 0
     bulletVelocity: 0
     pelletCountMax: 0
     pelletCountMin: 0
@@ -204,6 +217,7 @@ MonoBehaviour:
     magSize: 0
     ammoInMag: 0
     fireRate: 0
+    stability: 0
     bulletVelocity: 0
     pelletCountMax: 0
     pelletCountMin: 0
@@ -218,6 +232,7 @@ MonoBehaviour:
     magSize: 3
     ammoInMag: 3
     fireRate: 2
+    stability: 0
     bulletVelocity: 500
     pelletCountMax: 0
     pelletCountMin: 0
@@ -232,6 +247,7 @@ MonoBehaviour:
     magSize: 1
     ammoInMag: 1
     fireRate: 1
+    stability: 0
     bulletVelocity: 500
     pelletCountMax: 0
     pelletCountMin: 0
@@ -246,6 +262,7 @@ MonoBehaviour:
     magSize: 125
     ammoInMag: 125
     fireRate: 0.06
+    stability: 0
     bulletVelocity: 500
     pelletCountMax: 0
     pelletCountMin: 0
