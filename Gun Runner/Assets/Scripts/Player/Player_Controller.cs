@@ -41,6 +41,9 @@ public class Player_Controller : MonoBehaviour
 
     public HealthBar healthBar;
 
+    bool damageCoolDown = false;
+    float damangeCoolDownTimer = 1.0f;
+
     private void Awake()
     {
         playerCam = Camera.main;
@@ -90,6 +93,9 @@ public class Player_Controller : MonoBehaviour
     //Also checks if a bullet has hit the player, if so it runs the TakeDamage function
     private void OnTriggerEnter(Collider other)
     {
+        //because collision with level exit is in another script for some reason, it will call function in this script to save character info , then load
+
+
         if (other.gameObject.tag == "Cargo")
         {
             hasCargo = true;
@@ -103,6 +109,23 @@ public class Player_Controller : MonoBehaviour
         {
             //Debug.Log(other.name);
             TakeDamage(other.GetComponent<Bullet>().damage);
+        }
+
+        if(other.gameObject.tag == "HealthPack")
+        {
+            //gives one health
+            currentHealth++;
+            //sethealth
+            healthBar.SetHealth(currentHealth);
+        }
+        if(other.gameObject.tag == "AmmoPack")
+        {
+            //gives 2 mags for both guns
+            myBag.slot1.totalAmmo += 2 * myBag.slot1.magSize;
+            if (myBag.slot2.weapontype != weaponType.none)
+                myBag.slot2.totalAmmo += 2 * myBag.slot2.magSize;
+
+            //could add more ammo to cargo?
         }
     }
 
@@ -119,19 +142,23 @@ public class Player_Controller : MonoBehaviour
     //This function takes in damage values for the player. It also updates the Health Bar UI 
     void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-
-        healthBar.SetHealth(currentHealth);
-
-        //Will check if player is dead, if so the player is disabled and End Screen UI pops up
-        //Disables the players weapon, freezes the game, and activates the Game Over Screen
-        if (currentHealth <= 0)
+        if (damageCoolDown == false)
         {
-            isPlayerAlive = false;
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.transform.GetChild(2).gameObject.SetActive(false);
-            Time.timeScale = 0f;
-            Canvas.transform.GetChild(3).gameObject.SetActive(true);
+            currentHealth--;
+
+            healthBar.SetHealth(currentHealth);
+
+            //Will check if player is dead, if so the player is disabled and End Screen UI pops up
+            //Disables the players weapon, freezes the game, and activates the Game Over Screen
+            if (currentHealth <= 0)
+            {
+                isPlayerAlive = false;
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
+                gameObject.transform.GetChild(2).gameObject.SetActive(false);
+                Time.timeScale = 0f;
+                Canvas.transform.GetChild(3).gameObject.SetActive(true);
+            }
+            StartCoroutine(damangeCoolDownIE());
         }
     }
 
@@ -170,7 +197,6 @@ public class Player_Controller : MonoBehaviour
             weapon.checkWeapon();
         }
     }
-
 
     //shooting detection
     //show range of shooting detection (mainly for debugging)
@@ -220,5 +246,13 @@ public class Player_Controller : MonoBehaviour
     private void OnDestroy()
     {
         PlayerVars.Instance.health = currentHealth;
+    }
+
+    //player cannot take damange to often
+    IEnumerator damangeCoolDownIE()
+    {
+        damageCoolDown = true;
+        yield return new WaitForSeconds(damangeCoolDownTimer);
+        damageCoolDown = false;
     }
 }

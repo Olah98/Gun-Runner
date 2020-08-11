@@ -32,7 +32,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 //Debug.Log("Setting weapons");
                 PlayerVars.Instance.slot1 = gunObj.FindWeapon(1);
-                PlayerVars.Instance.slot2 = gunObj.FindWeapon(9);
+               // PlayerVars.Instance.slot2 = gunObj.FindWeapon(9);
                 //temp for testing
                 //PlayerVars.Instance.slot2 = gunObj.FindWeapon(17);
                 print("pistol set");

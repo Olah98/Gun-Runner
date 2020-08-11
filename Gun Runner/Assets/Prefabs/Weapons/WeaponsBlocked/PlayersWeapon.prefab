@@ -131,9 +131,14 @@ MonoBehaviour:
   magSize: 0
   ammoInMag: 0
   fireRate: 0
-  type: 0
-  current: 0
+  stability: 0
   bulletVelocity: 0
+  type: 0
+  _parent: {fileID: 0}
+  sniper: 0
+  laserSight: {fileID: 0}
+  laserSightRange: 0
+  current: 7
   pelletCountMax: 10
   pelletCountMin: 7
   spreadAngle: 10

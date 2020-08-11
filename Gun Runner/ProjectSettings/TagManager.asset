@@ -11,6 +11,8 @@ TagManager:
   - Cargo
   - GrenadeLauncherAmmo
   - Rocket
+  - HealthPack
+  - AmmoPack
   layers:
   - Default
   - TransparentFX

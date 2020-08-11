@@ -21,6 +21,7 @@ public class LevelTransition : MonoBehaviour
         {
             if (playerReference.hasCargo == true)
             {
+
                 loadLevel();
             }
             

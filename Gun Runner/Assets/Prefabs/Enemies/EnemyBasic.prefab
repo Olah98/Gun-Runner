@@ -338,7 +338,7 @@ MonoBehaviour:
   agent: {fileID: 3338982158843672530}
   trackingObj: {fileID: 2393606134296597611}
   checkRadius: 10
-  stopDistance: 0
+  stopDistance: 6
   bulletDetectionRadius: 2
   distance: 0
   speed: 3.5
