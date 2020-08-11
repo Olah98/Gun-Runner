@@ -13,8 +13,23 @@ public enum direction
     stop
 }
 
+public enum status
+{
+    none,
+    moving,
+    standing,
+    shooting,
+    agroMovement
+}
+
 public class AIPathingBase : MonoBehaviour
 {
+    /// <summary>
+    /// This is the main AI script
+    /// </summary>
+    //ANIMATION
+    public status currentStatus;
+
     //finds player that is closer and will move towards them
     //when there is not a player to track, it will either move in a patrol manner OR randomly up, down, left or right?
 
@@ -101,14 +116,14 @@ public class AIPathingBase : MonoBehaviour
     [Header("Fire durations")]
     public float triggerTimeMin = 1.0f;
     public float triggerTimeMax = 1.5f;
-
-    [Header("Viewing player")]
+    //viewing player
     private bool LineOfSightMade = false;
     private bool InRangeToFire = false;
-
     private bool _attackCycle = false;
     private bool _nearMiss = false;
-    
+
+    private bool _singleShot = false;
+
     //patrol will follow path, once it reaches its last node it will either go to the first node or go backwards
     private void Awake()
     {
@@ -191,13 +206,25 @@ public class AIPathingBase : MonoBehaviour
     void Update()
     {
         //if target is destoryed or doesnt exist, we check for a target
+        //while this happens enemy is moving
         if (_poi == null || !_poi.gameObject.activeInHierarchy)
         {
+            //if(this.GetComponent<Rigidbody>().)
+
             if (!canPatrol)
+            {
                 patrolMovement();
+                if (_current == direction.stop)
+                    currentStatus = status.standing;
+                else
+                    currentStatus = status.moving;
+            }
             else
+            {
                 patrolMovement2();
 
+            }
+                
             //aquire target
             _poi = GetClosestEnemy();
 
@@ -221,6 +248,10 @@ public class AIPathingBase : MonoBehaviour
             //movement and line of sight
             if (CheckPOIDistance() || _nearMiss)
             {
+                //has gun raised or something
+                if(!_firing && !_singleShot)
+                    currentStatus = status.agroMovement;
+
                 _attackCycle = false;
                 agent.isStopped = false;
                  
@@ -250,7 +281,11 @@ public class AIPathingBase : MonoBehaviour
                         if (gunType == weaponType.assaultRifle)
                             StartCoroutine(HoldTrigger());
                         else
+                        {
+                            StartCoroutine(SingleFire());
                             FireBullet();
+
+                        }
                     }
                 }
             }
@@ -259,12 +294,16 @@ public class AIPathingBase : MonoBehaviour
         //if someone shoots at enemy 
         FiredAt();
 
+        //for automatic firing
         if(_firing)
         {
+            currentStatus = status.shooting;
             FireBullet();
         }
+        
+            
 
-        if(health <= 0)
+        if (health <= 0)
         {
             //enemy is dead
             OnDeath();
@@ -300,13 +339,13 @@ public class AIPathingBase : MonoBehaviour
     //rooty shooty mc tooty
     void FireBullet()
     {
+        currentStatus = status.shooting;
         //new system
         if (gunType == weaponType.pistol || gunType == weaponType.assaultRifle || gunType == weaponType.DMR)
             gun.GetComponent<Weapon>().Shooting();
         else if (gunType == weaponType.shotgun)
             gun.GetComponent<ShotgunWeapon>().Shooting();
 
-        //old system
         //fire projectile forward (at player or poi)
         //set any variables HERE
         counter = 0.0f;
@@ -317,6 +356,7 @@ public class AIPathingBase : MonoBehaviour
     //UNUSED
     void DoMovement()
     {
+        currentStatus = status.moving;
         float distance = Vector3.Distance(path.corners[_currentIndex], transform.position);
         agent.SetDestination(Vector3.MoveTowards(transform.position, path.corners[_currentIndex], Time.deltaTime * speed * 100));
 
@@ -467,6 +507,7 @@ public class AIPathingBase : MonoBehaviour
     //set patrol path
     void patrolMovement2()
     {
+        currentStatus = status.moving;
         float distance = Vector3.Distance(pathToFollow.pathPoints[_currentIndexPatrol].position, transform.position);
         transform.position = Vector3.MoveTowards(transform.position, pathToFollow.pathPoints[_currentIndexPatrol].position, Time.deltaTime * speed);
 
@@ -577,9 +618,18 @@ public class AIPathingBase : MonoBehaviour
     //some weapons have continueous fire (like assaault and dmrs)
     IEnumerator HoldTrigger()
     {
+        currentStatus = status.shooting;
         _firing = true;
         yield return new WaitForSeconds(Random.Range(triggerTimeMin, triggerTimeMax));
         _firing = false;
+    }
+
+    IEnumerator SingleFire()
+    {
+        _singleShot = true;
+        currentStatus = status.shooting;
+        yield return new WaitForSeconds(0.5f);
+        _singleShot = false;
     }
 
     //if someone shoots at enemy, and bullets almost hit or do, enemy will know

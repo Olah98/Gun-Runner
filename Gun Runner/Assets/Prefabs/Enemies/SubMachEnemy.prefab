@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d29d02bacd9e54e41a11da573f60a727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStatus: 0
   agent: {fileID: 1787504031376888128}
   trackingObj: {fileID: 1706798288059233017}
   checkRadius: 10
@@ -268,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_OverrideArea: 0
   m_Area: 1
-  m_IgnoreFromBuild: 0
+  m_IgnoreFromBuild: 1
   m_AffectedAgents: ffffffff
 --- !u!1 &3562753497675064071
 GameObject:

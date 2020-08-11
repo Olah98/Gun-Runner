@@ -227,13 +227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d29d02bacd9e54e41a11da573f60a727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStatus: 0
   agent: {fileID: 722401349615184024}
   trackingObj: {fileID: 389494017896532769}
   checkRadius: 10
   stopDistance: 7
   bulletDetectionRadius: 2
-  _poi: {fileID: 0}
-  distanceToTarget: {x: 0, y: 0, z: 0}
   distance: 0
   speed: 3
   trackingSpeed: 4.5
@@ -267,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_OverrideArea: 0
   m_Area: 1
-  m_IgnoreFromBuild: 0
+  m_IgnoreFromBuild: 1
   m_AffectedAgents: ffffffff
 --- !u!1001 &2616607489996274675
 PrefabInstance:

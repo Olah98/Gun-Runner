@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d29d02bacd9e54e41a11da573f60a727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStatus: 0
   agent: {fileID: 3401372857583287330}
   trackingObj: {fileID: 2329948815607963547}
   checkRadius: 30
@@ -376,7 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_OverrideArea: 0
   m_Area: 1
-  m_IgnoreFromBuild: 0
+  m_IgnoreFromBuild: 1
   m_AffectedAgents: ffffffff
 --- !u!1001 &63490681320336549
 PrefabInstance:

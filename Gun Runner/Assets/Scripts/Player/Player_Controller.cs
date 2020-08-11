@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum playerStatus
+{
+    standing,
+    moving,
+    firing
+}
+
 public class Player_Controller : MonoBehaviour
 {
     //this is the main camera that fouces onto the player
@@ -44,6 +51,9 @@ public class Player_Controller : MonoBehaviour
     bool damageCoolDown = false;
     float damangeCoolDownTimer = 1.0f;
 
+    public bool CanPickUp = false;
+    public GameObject crate;
+
     private void Awake()
     {
         playerCam = Camera.main;
@@ -84,6 +94,7 @@ public class Player_Controller : MonoBehaviour
             moveAround();
             shootCurGun();
             changeGun();
+            PickUpGun();
         }
         ammoInMag.text = weapon.current.ToString() + ": " + weapon.ammoInMag.ToString();
 
@@ -98,8 +109,8 @@ public class Player_Controller : MonoBehaviour
 
         if (other.gameObject.tag == "Cargo")
         {
-            hasCargo = true;
-            Destroy(GameObject.FindWithTag("Cargo"));
+            //hasCargo = true;
+            //Destroy(GameObject.FindWithTag("Cargo"));
             //HERE IS SOME OF THAT TEMPORARY TEXT THAT NEEDS A NEW HOME
             cargoText.text = ("Cargo Collected!");
             
@@ -127,9 +138,24 @@ public class Player_Controller : MonoBehaviour
 
             //could add more ammo to cargo?
         }
+        if (other.gameObject.tag == "WeaponDrop")
+        {
+            if (other.GetComponent<WeaponDrop>().canPickUp)
+            {
+                Debug.Log("Pless e");
+                crate = other.gameObject;
+            }
+        }
     }
 
-    
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "WeaponDrop")
+        {
+            crate = null;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         //ignore collisions to fix some physics problems
@@ -175,6 +201,11 @@ public class Player_Controller : MonoBehaviour
     {
         //for movment we are updating the vector 3 with 2 inputs 
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if(movement != Vector3.zero)
+        {
+            //PLAY MOVEMENT ANIMATION HERE
+
+        }
         transform.position = transform.position + movement * moveSpeed * Time.deltaTime;
     }
 
@@ -182,6 +213,8 @@ public class Player_Controller : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            //fire animation here
+
             weapon.Shooting();
             ShootingDetection();
         }
@@ -195,6 +228,45 @@ public class Player_Controller : MonoBehaviour
             myBag.swapGun();
             //gunType = myBag.currnetWeapon.weapontype;
             weapon.checkWeapon();
+        }
+    }
+
+    void PickUpGun()
+    {
+        if (crate != null && Input.GetKeyDown(KeyCode.E))
+        {
+            if (crate.GetComponent<WeaponDrop>().cargoWeapon)
+            {
+                myBag.cargo = crate.GetComponent<WeaponDrop>().weapon;
+                Debug.Log("Picked up cargo");
+            }
+            else if (myBag.slot2.weapontype == weaponType.none && crate.GetComponent<WeaponDrop>().weapon.weapontype == myBag.slot1.weapontype)
+            {
+                myBag.slot1.totalAmmo += crate.GetComponent<WeaponDrop>().weapon.totalAmmo;
+                Debug.Log("Extra ammo, casue same gun dropped");
+            }
+            else if (myBag.slot2.weapontype == weaponType.none && crate.GetComponent<WeaponDrop>().weapon.weapontype != myBag.slot1.weapontype)
+            {
+                myBag.slot2 = crate.GetComponent<WeaponDrop>().weapon;
+                Debug.Log("Picked up secondary"); //no secondary before so automaticlly go there
+            }
+            else
+            {
+                //replaces gun in currently equiped slot
+                //player can choose (if the same gun is what dropped then give ammo)
+                if (myBag.currentlyEquiped == current.slot1 && crate.GetComponent<WeaponDrop>().weapon.weapontype != myBag.slot1.weapontype)
+                    myBag.slot1 = crate.GetComponent<WeaponDrop>().weapon;
+                else if (myBag.currentlyEquiped == current.slot2 && crate.GetComponent<WeaponDrop>().weapon.weapontype != myBag.slot2.weapontype)
+                    myBag.slot2 = crate.GetComponent<WeaponDrop>().weapon;
+                else if (myBag.currentlyEquiped == current.slot2 && crate.GetComponent<WeaponDrop>().weapon.weapontype == myBag.slot2.weapontype)
+                    myBag.slot2.totalAmmo += crate.GetComponent<WeaponDrop>().weapon.totalAmmo;
+                else if (myBag.currentlyEquiped == current.slot1 && crate.GetComponent<WeaponDrop>().weapon.weapontype == myBag.slot1.weapontype)
+                    myBag.slot1.totalAmmo += crate.GetComponent<WeaponDrop>().weapon.totalAmmo;
+
+                Debug.Log("replaced");
+            }
+            Destroy(crate.gameObject);
+            crate = null;
         }
     }
 
@@ -255,4 +327,6 @@ public class Player_Controller : MonoBehaviour
         yield return new WaitForSeconds(damangeCoolDownTimer);
         damageCoolDown = false;
     }
+
+    
 }

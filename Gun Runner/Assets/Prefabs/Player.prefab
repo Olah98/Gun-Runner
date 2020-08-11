@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 8510327572338910942}
   - component: {fileID: 8510327572338910941}
   - component: {fileID: 8510327572338910938}
+  - component: {fileID: 1715396906039611322}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -153,6 +154,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &1715396906039611322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510327572338910940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &1668371740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -948,6 +965,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d64ffe321953c5047ab4dc52270193d5,
+        type: 3}
+      propertyPath: m_TagString
+      value: IgnoreFromNav
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d64ffe321953c5047ab4dc52270193d5, type: 3}

@@ -2,10 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum current
+{
+    slot1,
+    slot2,
+    cargo
+}
+
 public class PlayerInventory : MonoBehaviour
 {
 
     
+
+    public current currentlyEquiped = current.slot1;
 
     [Header("My Gun")]
     public WeaponInstance currnetWeapon;
@@ -51,11 +60,13 @@ public class PlayerInventory : MonoBehaviour
         if (currnetWeapon == slot1)
         {
             //updates ammo left in mag on slot1
+            currentlyEquiped = current.slot2;
             slot1.ammoInMag = _playerWeapon.ammoInMag;
             currnetWeapon = slot2;
         }
         else if (currnetWeapon == slot2)
         {
+            currentlyEquiped = current.slot1;
             //updates ammo left in mag on slot2
             slot2.ammoInMag = _playerWeapon.ammoInMag;
             currnetWeapon = slot1;
