@@ -141,3 +141,5 @@ MonoBehaviour:
     pelletCountMin: 0
     spreadAngle: 0
     ammo: {fileID: 0}
+  weaponDropObj: {fileID: 8447179064459491367, guid: 85b3698e3fbfb904b953ff11ebdc97d5,
+    type: 3}

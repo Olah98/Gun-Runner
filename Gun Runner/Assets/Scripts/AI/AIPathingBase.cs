@@ -124,6 +124,8 @@ public class AIPathingBase : MonoBehaviour
 
     private bool _singleShot = false;
 
+    private EnemyAnimation _enemyAnimation;
+
     //patrol will follow path, once it reaches its last node it will either go to the first node or go backwards
     private void Awake()
     {
@@ -133,6 +135,7 @@ public class AIPathingBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _enemyAnimation = GetComponent<EnemyAnimation>();
         _rangeStop = Random.Range(0.4f, 0.7f);
         _fireRateSet = fireRate;
         fireRate = Random.Range(0.5f, _fireRateSet + (_fireRateSet * 0.1f));
@@ -308,6 +311,8 @@ public class AIPathingBase : MonoBehaviour
             //enemy is dead
             OnDeath();
         }
+
+        SetAnimation();
     }
 
     //when it dies
@@ -659,6 +664,31 @@ public class AIPathingBase : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    void SetAnimation()
+    {
+        //based on status enum
+        switch (currentStatus)
+        {
+            case status.none:
+                _enemyAnimation.IsIdling();
+                break;
+            case status.moving:
+                _enemyAnimation.IsRunning();
+                break;
+            case status.standing:
+                _enemyAnimation.IsIdling();
+                break;
+            case status.shooting:
+                _enemyAnimation.IsIdling();
+                break;
+            case status.agroMovement:
+                _enemyAnimation.IsRunning();
+                break;
+            default:
+                break;
         }
     }
 }
