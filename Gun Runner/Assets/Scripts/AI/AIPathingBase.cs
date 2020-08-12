@@ -18,8 +18,8 @@ public enum status
     none,
     moving,
     standing,
-    shooting,
-    agroMovement
+    dead
+
 }
 
 public class AIPathingBase : MonoBehaviour
@@ -240,20 +240,24 @@ public class AIPathingBase : MonoBehaviour
                  this.GetComponent<NavMeshAgent>().speed = Random.Range(-(speed * 0.2f), speed - (speed * 0.5f));
                 _attackCycle = false;
             }
-            
+
             if (distance <= stopDistance)
             {
                 this.GetComponent<NavMeshAgent>().speed = 0;
+                currentStatus = status.standing;
             }
             else
+            {
                 this.GetComponent<NavMeshAgent>().speed = speed;
+                currentStatus = status.moving;
+            }
 
             //movement and line of sight
             if (CheckPOIDistance() || _nearMiss)
             {
                 //has gun raised or something
-                if(!_firing && !_singleShot)
-                    currentStatus = status.agroMovement;
+                //if(!_firing && !_singleShot)
+                   // currentStatus = status.agroMovement;
 
                 _attackCycle = false;
                 agent.isStopped = false;
@@ -300,7 +304,7 @@ public class AIPathingBase : MonoBehaviour
         //for automatic firing
         if(_firing)
         {
-            currentStatus = status.shooting;
+            //currentStatus = status.shooting;
             FireBullet();
         }
         
@@ -344,7 +348,7 @@ public class AIPathingBase : MonoBehaviour
     //rooty shooty mc tooty
     void FireBullet()
     {
-        currentStatus = status.shooting;
+        //currentStatus = status.shooting;
         //new system
         if (gunType == weaponType.pistol || gunType == weaponType.assaultRifle || gunType == weaponType.DMR)
             gun.GetComponent<Weapon>().Shooting();
@@ -623,7 +627,7 @@ public class AIPathingBase : MonoBehaviour
     //some weapons have continueous fire (like assaault and dmrs)
     IEnumerator HoldTrigger()
     {
-        currentStatus = status.shooting;
+        //currentStatus = status.shooting;
         _firing = true;
         yield return new WaitForSeconds(Random.Range(triggerTimeMin, triggerTimeMax));
         _firing = false;
@@ -632,7 +636,7 @@ public class AIPathingBase : MonoBehaviour
     IEnumerator SingleFire()
     {
         _singleShot = true;
-        currentStatus = status.shooting;
+        //currentStatus = status.shooting;
         yield return new WaitForSeconds(0.5f);
         _singleShot = false;
     }
@@ -680,12 +684,6 @@ public class AIPathingBase : MonoBehaviour
                 break;
             case status.standing:
                 _enemyAnimation.IsIdling();
-                break;
-            case status.shooting:
-                _enemyAnimation.IsIdling();
-                break;
-            case status.agroMovement:
-                _enemyAnimation.IsRunning();
                 break;
             default:
                 break;
