@@ -5,6 +5,7 @@ Gun Runner is a 2d, rouge-like game where the objective is to extract special ca
 The game is a top down, 2D shooter made in a 3D environment. The environments are randomly generated to give a new, fresh run each time the player starts the game. 
 
 ITCH.IO PAGE:https://bunnyyee.itch.io/gun-runners
+
 Game Doc:
 
 Credits:
