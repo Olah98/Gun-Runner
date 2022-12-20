@@ -4,9 +4,11 @@ This is a game some friends are making over their summer break
 Gun Runner is a 2d, rouge-like game where the objective is to extract special cargo in exchange for cash. However, some enemies may prove too challenging to fight without extra firepower, so you can use the cargo to help you but you’ll get less money at the end of the mission. At the end of each mission, you can buy perks, upgrades, and other accessories to help them in future levels. The levels get harder as the player progresses and dying is the end of the game, you lose everything and have to start over.
 The game is a top down, 2D shooter made in a 3D environment. The environments are randomly generated to give a new, fresh run each time the player starts the game. 
 
-ITCH.IO PAGE:https://bunnyyee.itch.io/gun-runners
+ITCH.IO PAGE: https://bunnyyee.itch.io/gun-runners
 
-Game Doc:
+Game Doc: https://docs.google.com/document/d/1tYAFu2XH9JK3TSl2dRWD0dKPqwF9_2kFaMcwMwU6vi8/edit?usp=sharing
+
+Unity 2019.3.6f1
 
 Credits:
 Producer: Olivia Yee
