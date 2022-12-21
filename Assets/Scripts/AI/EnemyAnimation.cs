@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class EnemyAnimation : MonoBehaviour
 {
+    /// <summary>
+    /// Enemy Animation Setup
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - provides animation states of enemies
+    /// </summary>
     private Animator animator;
 
     private void Start()

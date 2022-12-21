@@ -6,6 +6,15 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(AudioSource))]
 public class PlayAudio : MonoBehaviour
 {
+    /// <summary>
+    /// Play Audio
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - Playing audio events
+    /// </summary>
+    
     AudioSource audioData;
     // Start is called before the first frame update
     void Start()

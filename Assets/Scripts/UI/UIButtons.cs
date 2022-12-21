@@ -5,17 +5,15 @@ using UnityEngine;
 
 public class UIButtons : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// UI Behavior
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - UI buttons for menus
+    /// 
+    /// </summary>
 
     public void ExitApplication()
     {

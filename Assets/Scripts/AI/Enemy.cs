@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
+    /// <summary>
+    /// Enemy Behavior
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - Enemy behavior and navigation
+    /// </summary>
+    
     public GameObject incomingBullet;
     public int Health;
-
-
-    
 
     // Update is called once per frame
     void Update()
@@ -27,7 +32,6 @@ public class Enemy : MonoBehaviour
         {
             Health -= other.gameObject.GetComponent<TestBullet>().damageValue;
             Destroy(other.gameObject);
-            
         }
     }
 }

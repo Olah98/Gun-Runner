@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class DrawPath : MonoBehaviour
 {
+    /// <summary>
+    /// Draw Path AI Movement
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - Patrol Path behavior
+    /// </summary>
+
     [Header("The Color of The Path Drawn in the Editor")]
     [Header("MAKE SURE TO UNPACK THE PATH PREFAB IN SCENE")]
     public Color rayColor = Color.red;
@@ -17,7 +26,6 @@ public class DrawPath : MonoBehaviour
     {
         total = pathPoints.Count;
     }
-
 
     private void OnDrawGizmos()
     {

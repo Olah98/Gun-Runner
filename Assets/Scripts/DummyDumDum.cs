@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class DummyDumDum : MonoBehaviour
 {
+    /// <summary>
+    /// Player Test script
+    /// Alex Olah
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - testing values, death and basic UI integration
+    /// 
+    /// </summary>
+
 
     public int maxHealth = 100;
     public int currentHealth;

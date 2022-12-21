@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class PlayerWeapom : Weapon
 {
+    /// <summary>
+    /// Current equiped player weapon
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - 
+    /// 
+    /// </summary>
+
     public weaponType current;
     private WeaponInstance _currentWeaponInstance;
 
@@ -24,7 +34,6 @@ public class PlayerWeapom : Weapon
     {
         _parent = this.transform.parent.gameObject;
         checkWeapon();
-        //current = _currentWeaponInstance.weapontype;
     }
 
     public void checkWeapon()
@@ -40,49 +49,6 @@ public class PlayerWeapom : Weapon
         fireRate = _currentWeaponInstance.fireRate;
         bulletVelocity = _currentWeaponInstance.bulletVelocity;
         projectile = _currentWeaponInstance.ammo;
-
-       //// switch (current)
-      //  {
-            //each value is set in scriptable object
-          //  case weaponType.pistol:
-           //     damage = 10;
-           //     reloadSpeed = 2; 
-          //      totalAmmo = 60; 
-          //      magSize = 6;
-          //      ammoInMag = 6;
-          //      fireRate = 1;
-          //      bulletVelocity = 500;
-           //     break;
-         //  // case weaponType.shotgun:
-          //      damage = 5;
-           //     reloadSpeed = 5;
-           //     totalAmmo = 25;
-           //     magSize = 5;
-          //      ammoInMag = 5;
-          //      fireRate = 1;
-         //       bulletVelocity = 500;
-         //       break;
-         //   case weaponType.assaultRifle:
-         //       damage = 10;
-         //       reloadSpeed = 5;
-         //       totalAmmo = 35;
-         //       magSize = 20;
-         //       ammoInMag = 20;
-         //       fireRate = .1f;
-         //       bulletVelocity = 500;
-         //       break;
-         //   case weaponType.DMR:
-         //       damage = 10;
-        //        reloadSpeed = 6;
-         //       totalAmmo = 15;
-         //       magSize = 3;
-         //       ammoInMag = 3;
-         //       fireRate = 3;
-         //       bulletVelocity = 700;
-         //       break;
-         //   default:
-         //       break;
-        ////}
 
     } 
 
@@ -146,7 +112,5 @@ public class PlayerWeapom : Weapon
             default:
                 break;
         }
-
     }
-
 }

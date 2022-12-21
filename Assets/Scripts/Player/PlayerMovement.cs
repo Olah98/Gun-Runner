@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    /// <summary>
+    /// Player Movement
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - Player movement and input
+    /// </summary>
+    
     public float moveSpeed = 5f;
     public Rigidbody rb;
     Vector3 movement;
@@ -15,8 +24,6 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 mousePos;
     //TEST LINE, POSSIBLY DELETE
     public TestGunControlMerge currentGun;
-
-   
 
     // Update is called once per frame
     void Update()
@@ -31,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
         float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
 
-
         //TEST LINES, POSSIBLY DELETE
         if (Input.GetButton("Fire1"))
         {
@@ -42,11 +48,6 @@ public class PlayerMovement : MonoBehaviour
         {
             currentGun.isFiring = false;
         }
-
-        
-
-
-
     }
 
     void FixedUpdate()
@@ -56,7 +57,5 @@ public class PlayerMovement : MonoBehaviour
 
         //Meant to help prevent player drift when colliding with an object
         rb.angularVelocity = Vector3.zero;
-
-      
     }
 }

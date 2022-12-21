@@ -5,6 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class LevelTransition : MonoBehaviour
 {
+    /// <summary>
+    /// Level Transition
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - When levels need to be changed
+    /// </summary>
+    
     public string nextLevel;
 
     public Player_Controller playerReference;
@@ -21,7 +30,6 @@ public class LevelTransition : MonoBehaviour
         {
             if (playerReference.hasCargo == true)
             {
-
                 loadLevel();
             }
             

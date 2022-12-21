@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    
-   // public Slider slider;
-
-    //public Text healthText;
+    /// <summary>
+    /// Health bar
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - UI displaying health on screen
+    /// 
+    /// </summary>
 
     public Sprite healthHeartFull; //4 health
     public Sprite healthHeartEmpty;

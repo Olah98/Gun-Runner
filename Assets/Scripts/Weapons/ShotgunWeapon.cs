@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class ShotgunWeapon : Weapon
 {
+    /// <summary>
+    /// Shotgun Behavior
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - shoots multiple pelets with a spread
+    /// 
+    /// </summary>
+
     [Header("Shotgun Pellet Count")]
     public int pelletCountMax;
     public int pelletCountMin;

@@ -25,8 +25,14 @@ public enum status
 public class AIPathingBase : MonoBehaviour
 {
     /// <summary>
-    /// This is the main AI script
+    /// Enemy Behavior
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - This is the main AI script
     /// </summary>
+
     //ANIMATION
     public status currentStatus;
 
@@ -230,7 +236,6 @@ public class AIPathingBase : MonoBehaviour
                 
             //aquire target
             _poi = GetClosestEnemy();
-
         }
         else
         {
@@ -307,8 +312,6 @@ public class AIPathingBase : MonoBehaviour
             //currentStatus = status.shooting;
             FireBullet();
         }
-        
-            
 
         if (health <= 0)
         {
@@ -362,28 +365,6 @@ public class AIPathingBase : MonoBehaviour
         fireRate = Random.Range(1f, _fireRateSet + (_fireRateSet * 0.1f));
     }
 
-    //UNUSED
-    void DoMovement()
-    {
-        currentStatus = status.moving;
-        float distance = Vector3.Distance(path.corners[_currentIndex], transform.position);
-        agent.SetDestination(Vector3.MoveTowards(transform.position, path.corners[_currentIndex], Time.deltaTime * speed * 100));
-
-        if(path.corners[_currentIndex] - transform.position != Vector3.zero)
-        {
-            Quaternion rotation = Quaternion.LookRotation(path.corners[_currentIndex] - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
-        }
-
-        if(distance <= _reachDistance && _currentIndex < path.corners.Length - 1)
-        {
-            if (!_isDone)
-                _currentIndex++;
-            else
-                _isDone = true;
-        }
-    }
-
     //finds distance between enemy and poi, returns true if we are in range
     bool CheckPOIDistance()
     {
@@ -431,7 +412,6 @@ public class AIPathingBase : MonoBehaviour
                 hitTarget = false;
         }
         LineOfSightMade = hitTarget;
-   
 
         if (hitTarget == true)
             _attackCycle = false;
@@ -482,7 +462,6 @@ public class AIPathingBase : MonoBehaviour
         //Debug.Log(closestDistanceSqr);
         _attackCycle = true;
         return bestTarget;
-
     }
 
     //locate transforms from colliders found in sphere
@@ -505,7 +484,6 @@ public class AIPathingBase : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, bulletDetectionRadius);
     }
   
-
     //simple math, get distance
     private float getDistanceSqr(Vector3 initialPoint, Vector3 targetPoint)
     {
@@ -644,7 +622,6 @@ public class AIPathingBase : MonoBehaviour
     //if someone shoots at enemy, and bullets almost hit or do, enemy will know
     public void FiredAt()
     {
-        
         _bulletsNear = collidersToTransforms(Physics.OverlapSphere(transform.position, bulletDetectionRadius));
         foreach (Transform potentialTarget in _bulletsNear)
         {
@@ -687,6 +664,28 @@ public class AIPathingBase : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    //UNUSED
+    void DoMovement()
+    {
+        currentStatus = status.moving;
+        float distance = Vector3.Distance(path.corners[_currentIndex], transform.position);
+        agent.SetDestination(Vector3.MoveTowards(transform.position, path.corners[_currentIndex], Time.deltaTime * speed * 100));
+
+        if (path.corners[_currentIndex] - transform.position != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(path.corners[_currentIndex] - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        }
+
+        if (distance <= _reachDistance && _currentIndex < path.corners.Length - 1)
+        {
+            if (!_isDone)
+                _currentIndex++;
+            else
+                _isDone = true;
         }
     }
 }

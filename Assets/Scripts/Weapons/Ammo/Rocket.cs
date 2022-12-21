@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
+    /// <summary>
+    /// Rocket Behavior
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - Rocket behaviors, area of effect damage
+    /// 
+    /// </summary>
+    
     public GameObject hitEffect;
     public int damage = 5;
     public float explosionRadius = 5;

@@ -12,6 +12,15 @@ public enum playerStatus
 
 public class Player_Controller : MonoBehaviour
 {
+    /// <summary>
+    /// Player Controller
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - Player UI, stats, player setup
+    /// </summary>
+
     //this is the main camera that fouces onto the player
     Camera playerCam;
 
@@ -58,8 +67,6 @@ public class Player_Controller : MonoBehaviour
     {
         playerCam = Camera.main;
         myBag = FindObjectOfType<PlayerInventory>();
-
-        //SetPlayerGunData();
        
         //This time scale is to resume the game after the Game Over Screen pops up. 
         //The time scale gets set to 0 when the game over screen pops up
@@ -77,7 +84,6 @@ public class Player_Controller : MonoBehaviour
 
         }
         //Sets player health to the Max Health value
-        //currentHealth = maxHealth;
         //Sets Health UI text to the Max Health value
         healthBar.SetMaxHealth(maxHealth);
         healthBar.SetHealth(currentHealth);
@@ -97,7 +103,6 @@ public class Player_Controller : MonoBehaviour
             PickUpGun();
         }
         ammoInMag.text = weapon.current.ToString() + ": " + weapon.ammoInMag.ToString();
-
     }
 
     //This is to check if the player has picked up the Cargo or not.
@@ -106,14 +111,12 @@ public class Player_Controller : MonoBehaviour
     {
         //because collision with level exit is in another script for some reason, it will call function in this script to save character info , then load
 
-
         if (other.gameObject.tag == "Cargo")
         {
             //hasCargo = true;
             //Destroy(GameObject.FindWithTag("Cargo"));
             //HERE IS SOME OF THAT TEMPORARY TEXT THAT NEEDS A NEW HOME
             cargoText.text = ("Cargo Collected!");
-            
         }
 
         if (other.gameObject.tag == "Bullet" && other.gameObject.GetComponent<Bullet>().type == shootType.enemy)
@@ -327,6 +330,4 @@ public class Player_Controller : MonoBehaviour
         yield return new WaitForSeconds(damangeCoolDownTimer);
         damageCoolDown = false;
     }
-
-    
 }

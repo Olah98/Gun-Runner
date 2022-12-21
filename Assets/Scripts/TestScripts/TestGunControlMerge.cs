@@ -10,7 +10,15 @@ public enum gunType
 
 public class TestGunControlMerge : MonoBehaviour
 {
-  
+    /// <summary>
+    /// Gun behavior controller
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - gun behavior scripts
+    /// 
+    /// </summary>
 
     public gunType myType = gunType.pistol;
 
@@ -25,8 +33,6 @@ public class TestGunControlMerge : MonoBehaviour
     public float fireRate = 15f;
     private float nextTimeToFire = 0f;
 
-
-
     private void Start()
     {
         if (myType == gunType.pistol)
@@ -35,17 +41,13 @@ public class TestGunControlMerge : MonoBehaviour
             fireRate = 8f;
             bulletForce = 10f;
             bulletDamage = 5;
-
-
         }
 
         if (myType == gunType.shotgun)
         {
-
             fireRate = 2f;
             bulletForce = 15f;
             bulletDamage = 10;
-
         }
     }
 
@@ -59,7 +61,6 @@ public class TestGunControlMerge : MonoBehaviour
                 //This magical math formula determines how fast we fire in seconds. 1 divided by 4 would be a fire rate of .25 seconds
                 nextTimeToFire = Time.time + 1f / fireRate;
                 Shoot();
-
             }
         }
         
@@ -86,16 +87,5 @@ public class TestGunControlMerge : MonoBehaviour
             rb.AddForce(firePosition.forward * bulletForce, ForceMode.Impulse);
             Destroy(bullet, 3f);
         }
-
-
-
-        //GameObject bullet = Instantiate(bulletPrefab, firePosition.transform.position, Quaternion.identity);
-        /*bullet.GetComponent<TestBullet>().damageValue = bulletDamage;
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.AddForce(firePosition.forward * bulletForce, ForceMode.Impulse);
-        Destroy(bullet, 3f);  */
     }
-    
-    
-
-    }
+}

@@ -10,22 +10,21 @@ public enum shootType
 
 public class Bullet : MonoBehaviour
 {
+    /// <summary>
+    /// Bullet Behavior
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - has an effect when hits something, tbd
+    /// 
+    /// </summary>
+
     public GameObject hitEffect;
     public int damage = 5;
     //public float bulletVelocity = 500;
     public shootType type;
     public GameObject shooter;
-
-    private void Start()
-    {
-        
-        //this.GetComponent<Rigidbody>().AddForce(this.transform.forward * bulletVelocity);
-    }
-
-    private void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -47,8 +46,6 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -58,5 +55,4 @@ public class Bullet : MonoBehaviour
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
         }
     }
-
 }

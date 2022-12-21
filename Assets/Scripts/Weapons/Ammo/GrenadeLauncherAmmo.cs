@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class GrenadeLauncherAmmo : MonoBehaviour
 {
-    //if it hits an enemy it blows up
-    //otherwise it runs a countdown then blows up
-
-    //will use physics to roll balll around
-    //damage player?
+    /// <summary>
+    /// Grenade Launcher Ammo Behavior
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - if it hits an enemy it blows up
+    /// - otherwise it runs a countdown then blows up
+    /// - will use physics to roll balll around
+    /// 
+    /// Questions:
+    /// - damage player?
+    /// 
+    /// </summary>
 
     public GameObject hitEffect;
     public float explosionRadius = 5;
@@ -32,9 +41,7 @@ public class GrenadeLauncherAmmo : MonoBehaviour
 
     private void Start()
     {
-        
         counterDecrement = (counterVal/timer);
-       // Debug.Log(timer * (counterVal/timer));
         counterS = 0;
         //starts countdown
         StartCoroutine(CountDown());
@@ -57,7 +64,6 @@ public class GrenadeLauncherAmmo : MonoBehaviour
                     colorTick = true;
                 }
 
-                //counterP += counterVal;
                 tick -= counterDecrement;
                 counterDecrement = tick*(counterVal / timer);
                 counterS = 0;
@@ -114,7 +120,6 @@ public class GrenadeLauncherAmmo : MonoBehaviour
             }
         }
 
-        
         StartCoroutine(showExplosion());
         //will maybe have particle effect too!
     }

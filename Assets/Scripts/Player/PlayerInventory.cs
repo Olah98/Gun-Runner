@@ -11,8 +11,15 @@ public enum current
 
 public class PlayerInventory : MonoBehaviour
 {
+    /// <summary>
+    /// Player Inventory
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - weapon loadouts, stored cargo
+    /// </summary>
 
-    
 
     public current currentlyEquiped = current.slot1;
 
@@ -24,12 +31,9 @@ public class PlayerInventory : MonoBehaviour
     [Header("Cargo Weapon")]
     public WeaponInstance cargo;
 
-   
-
     public PlayerWeapom _playerWeapon;
 
-    public WeaponData gunObj;
-    
+    public WeaponData gunObj; 
 
     private void Start()
     {
@@ -48,7 +52,6 @@ public class PlayerInventory : MonoBehaviour
             }
             SetGun1(PlayerVars.Instance.slot1);
             SetGun2(PlayerVars.Instance.slot2);
-
         }
         currnetWeapon = slot1;
         _playerWeapon = FindObjectOfType<PlayerWeapom>();

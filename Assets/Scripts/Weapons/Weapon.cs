@@ -33,6 +33,16 @@ public enum weaponType
 
 public class Weapon : MonoBehaviour
 {
+    /// <summary>
+    /// Parent weapon Behavior
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - all weapons should inherit this class
+    /// 
+    /// </summary>
+
     [Header("Weapon Bullet Type")]
     public GameObject projectile;
     [Header("Weapon Damage")]
@@ -58,7 +68,6 @@ public class Weapon : MonoBehaviour
     public shootType type;
 
     public GameObject _parent;
-
 
     [Header("Must have the LaserSight prefab in the scene (Found in Particles Folder)")]
     [Header("Laser sight")]
@@ -112,8 +121,6 @@ public class Weapon : MonoBehaviour
                 StartCoroutine(Reloading());
             }
         }
-
-        
     }
 
     public IEnumerator FireCoolDown()

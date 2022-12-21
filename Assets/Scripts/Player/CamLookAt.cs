@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class CamLookAt : MonoBehaviour
 {
+    /// <summary>
+    /// Camera Behavior
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - Stays locked onto player (aka target)
+    /// </summary>
 
     public GameObject target;
 

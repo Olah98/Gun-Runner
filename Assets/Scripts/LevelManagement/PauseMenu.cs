@@ -5,6 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    /// <summary>
+    /// Pause Menu
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - Player Pause Menu
+    /// </summary>
+
     //to see if the game is paused or not
     public static bool GameIsPaused = false;
 

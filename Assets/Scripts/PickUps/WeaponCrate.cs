@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class WeaponCrate : MonoBehaviour
 {
+    /// <summary>
+    /// Weapon Crate Behavior
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - Player goal
+    ///     - contains weapons for player
+    /// </summary>
+    
     [Header("Select if designer wished to manually choose gun")]
     public bool manuallyAssignGun = false;
     [Header("Choose which gun number is assigned to this crate")]

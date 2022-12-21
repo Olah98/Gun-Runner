@@ -5,13 +5,21 @@ using UnityEngine;
 
 public class PlayerVars : MonoBehaviour
 {
+    /// <summary>
+    /// Player Weapon Loadouts Variables
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - player weapon inventory
+    /// </summary>
+    
     private static PlayerVars _instance;//creats a ref in script
 
     public static PlayerVars Instance { get { return _instance; } }// allows anythin in the scene to ref this script
 
     public int health = 0;
     public int credits;
-
 
     [Header("Guns moving forward")]
     public WeaponInstance slot1 = new WeaponInstance();
@@ -22,40 +30,6 @@ public class PlayerVars : MonoBehaviour
         if (_instance != null && _instance != this) { Destroy(this.gameObject); } else { _instance = this; }//destroys any player inventorys that are not the orignal one
 
         DontDestroyOnLoad(gameObject);//makes this stay acrossed level loads so vars stay consistant
-
     }
-
-    private void Start()
-    {
-      // if(FindObjectOfType<PlayerVars>().isActiveAndEnabled)
-      // {
-      //     print("Found the Player");
-      //     //Player_Controller playerInstance = FindObjectOfType<Player_Controller>();
-      //     if (health == 0) { health = playerInstance.maxHealth; }
-      //     playerInstance.currentHealth = health;
-      //     
-      // }
-        
-        
-        
-      // if (FindObjectOfType<PlayerVars>().isActiveAndEnabled)
-      // {
-      //     print("Found the Player's Bag");
-      //     PlayerInventory bagInstance = FindObjectOfType<PlayerInventory>();
-      //     
-      //
-      //     if (slot1.weapontype == weaponType.none)
-      //     {
-      //        slot1 = gunObj.FindWeapon(1);
-      //        print("pistol set");
-      //     }
-      //     bagInstance.SetGun1(slot1);
-      //     bagInstance.SetGun2(slot2);
-      //
-      // }
-      // 
-    }
-
-
 
 }

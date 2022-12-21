@@ -5,6 +5,15 @@ using UnityEngine;
 
 public class WeaponDrop : MonoBehaviour
 {
+    /// <summary>
+    /// Weapon Drops
+    /// Dylan Loe
+    /// 
+    /// Updated June 15, 2020
+    /// 
+    /// - Possible weapons for players to pick up and use
+    /// </summary>
+    
     public WeaponInstance weapon;
 
     [Header("how close player is to pick up gun")]
@@ -32,7 +41,6 @@ public class WeaponDrop : MonoBehaviour
         mText = GetComponentInChildren<TextMesh>();
         //mText.transform.localScale = mText.transform.localScale * -1;
     }
-
 
     private void Update()
     {
