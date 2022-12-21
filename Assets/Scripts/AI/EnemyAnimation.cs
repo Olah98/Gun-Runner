@@ -14,7 +14,7 @@ public class EnemyAnimation : MonoBehaviour
     public void IsRunning()
     {
         animator.SetBool("isIdling", false);
-        animator.SetBool("Death", false);
+        animator.SetBool("isDying", false);
         animator.SetBool("isRunning", true);
 
     }
@@ -22,14 +22,14 @@ public class EnemyAnimation : MonoBehaviour
     public void IsIdling()
     {
         animator.SetBool("isIdling", true);
-        animator.SetBool("Death", false);
+        animator.SetBool("isDying", false);
         animator.SetBool("isRunning", false);
     }
 
     public void DeathAnimator()
     {
         animator.SetBool("isIdling", false);
-        animator.SetBool("Death", true);
+        animator.SetBool("isDying", true);
         animator.SetBool("isRunning", false);
     }
 }
